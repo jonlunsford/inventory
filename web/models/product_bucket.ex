@@ -15,5 +15,8 @@ defmodule Inventory.ProductBucket do
     struct
     |> cast(params, [:product_id, :bucket_id])
     |> validate_required([:product_id, :bucket_id])
+    |> foreign_key_constraint(:bucket_id)
+    |> foreign_key_constraint(:product_id)
+    |> unique_constraint(:product_id_bucket_id)
   end
 end

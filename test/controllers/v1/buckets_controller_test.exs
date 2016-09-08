@@ -1,12 +1,15 @@
-require IEx
-
 defmodule Inventory.V1.BucketsControllerTest do
   use ExUnit.Case
   use Inventory.ConnCase
 
   setup do
-    bucket = %Inventory.Bucket{name: "My Bucket"} |> Inventory.Repo.insert!
-    product = %Inventory.Product{title: "My Product"} |> Inventory.Repo.insert!
+    bucket =
+      %Inventory.Bucket{name: "My Bucket"}
+      |> Inventory.Repo.insert!
+
+    product =
+      %Inventory.Product{title: "My Product"}
+      |> Inventory.Repo.insert!
 
     %Inventory.ProductBucket{
       product_id: product.id,

@@ -7,6 +7,9 @@ defmodule Inventory.Product do
     has_many :products_buckets, Inventory.ProductBucket
     has_many :buckets, through: [:products_buckets, :bucket]
 
+    has_many :products_fields, Inventory.ProductField
+    has_many :fields, through: [:products_fields, :field]
+
     timestamps()
   end
 

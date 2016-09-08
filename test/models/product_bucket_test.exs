@@ -15,4 +15,5 @@ defmodule Inventory.ProductBucketTest do
     changeset = ProductBucket.changeset(%ProductBucket{}, @invalid_attrs)
     refute changeset.valid?
   end
+
 end

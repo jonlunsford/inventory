@@ -1,5 +1,3 @@
-require IEx
-
 defmodule Inventory.V1.BucketsView do
   use Inventory.Web, :view
 

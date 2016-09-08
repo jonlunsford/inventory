@@ -25,6 +25,7 @@ defmodule Inventory.Router do
 
     scope "/v1", V1, as: :v1 do
       resources "/buckets", BucketsController
+      resources "/products", ProductsController
     end
   end
 end

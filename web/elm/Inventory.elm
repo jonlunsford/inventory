@@ -1,78 +1,105 @@
 module Inventory exposing(..)
 
-import Html exposing(..)
 import Html.App as App
-import Html.Attributes exposing(..)
-import Html.Events exposing (..)
-import Http
-import Json.Decode as Json
-import Task
+import Html exposing (..)
+import Html.Attributes exposing (href, class, style)
 
-main =
-  App.program
-    { init = init
-    , view = view
-    , update = update
-    , subscriptions = subscriptions
-    }
+import Material
+import Material.Layout as Layout
+import Material.Button as Button
+import Material.Options exposing (css)
+
 
 -- MODEL
 
+
 type alias Model =
-  { topic : String
-  , gifUrl : String
+  { mdl : Material.Model
+  , count : Int
+  , selectedTab : Int
+      -- Boilerplate: model store for any and all Mdl components you use.
   }
 
--- INIT
 
-init : (Model, Cmd Msg)
-init =
-  (Model "cats" "waiting.gif", Cmd.none)
+model : Model
+model =
+  { mdl = Material.model
+  , count = 0
+  , selectedTab = 0
+  }
 
--- UPDATE
+
+-- ACTION, UPDATE
+
 
 type Msg
-  = MorePlease
-  | FetchSucceed String
-  | FetchFail Http.Error
+  = Increase
+  | Reset
+  | Mdl (Material.Msg Msg)
+      -- Boilerplate: Msg clause for internal Mdl messages.
+
 
 update : Msg -> Model -> (Model, Cmd Msg)
 update msg model =
   case msg of
-    MorePlease ->
-      (model, getRandomGif model.topic)
+    Increase ->
+      ( { model | count = model.count + 1 }
+      , Cmd.none
+      )
 
-    FetchSucceed newUrl ->
-      (model model.topic newUrl, Cmd.none)
+    Reset ->
+      ( { model | count = 0 }
+      , Cmd.none
+      )
 
-    FetchFail _->
-      (model, Cmd.none)
+    -- Boilerplate: Mdl action handler.
+    Mdl msg' ->
+      Material.update msg' model
 
 
 -- VIEW
 
+
+type alias Mdl =
+  Material.Model
+
+header : Model -> List (Html Msg)
+header model =
+  [ Layout.row
+    []
+    [ Layout.title [] [ text "Hello Header" ] ]
+  ]
+
+drawer : List (Html Msg)
+drawer =
+  [ Layout.title [] [ text "Hello Drawer" ]
+  , Layout.navigation
+    []
+    [ Layout.link
+      [ Layout.href "http://google.com" ]
+      [ text "Hello Link" ]
+    ]
+  ]
+
+tabs : List (String, String)
+tabs =
+  [ ( "Tab1", "tab1" ) ]
+
 view : Model -> Html Msg
 view model =
-  div []
-    [ h2 [] [ text model.topic ]
-    , img [ src model.gifUrl ] []
-    , button [ onClick MorePlease ] [ text "More Please!" ]
-    ]
+  Layout.render Mdl model.mdl
+    [ Layout.selectedTab model.selectedTab ]
+    { header = header model
+    , drawer = drawer
+    , tabs = tabs
+    , main = [  ]
+    }
 
--- SUBSCRIPTIONS
-
-subscriptions : Model -> Sub Msg
-subscriptions model =
-  Sub.none
-
-getRandomGif : String -> Cmd Msg
-getRandomGif topic =
-  let
-    url =
-      "https://api.giphy.com/v1/gifs/random?api_key=dc6zaTOxFJmzC&tag=" ++ topic
-  in
-    Task.perform FetchFail FetchSucceed (Http.get decodeGifUrl url)
-
-decodeGifUrl : Json.Decoder String
-decodeGifUrl =
-  Json.at ["data", "image_url"] Json.string
+main : Program Never
+main =
+  App.program
+    { init = ( model, Layout.sub0 Mdl)
+    , view = view
+    , subscriptions = Material.subscriptions Mdl
+    , update = update
+    }

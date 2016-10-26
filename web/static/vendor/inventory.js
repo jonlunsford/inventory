@@ -13392,26 +13392,488 @@ var _debois$elm_mdl$Material$Model = F8(
 		return {button: a, textfield: b, menu: c, snackbar: d, layout: e, toggles: f, tooltip: g, tabs: h};
 	});
 
+var _debois$elm_mdl$Material_Grid$clip = F3(
+	function (lower, upper, k) {
+		return A2(
+			_elm_lang$core$Basics$max,
+			lower,
+			A2(_elm_lang$core$Basics$min, k, upper));
+	});
+var _debois$elm_mdl$Material_Grid$stretch = _debois$elm_mdl$Material_Options$cs('mdl-cell--stretch');
+var _debois$elm_mdl$Material_Grid$align = function (a) {
+	var _p0 = a;
+	switch (_p0.ctor) {
+		case 'Top':
+			return _debois$elm_mdl$Material_Options$cs('mdl-cell--top');
+		case 'Middle':
+			return _debois$elm_mdl$Material_Options$cs('mdl-cell--middle');
+		default:
+			return _debois$elm_mdl$Material_Options$cs('mdl-cell--bottom');
+	}
+};
+var _debois$elm_mdl$Material_Grid$suffix = function (device) {
+	var _p1 = device;
+	switch (_p1.ctor) {
+		case 'All':
+			return '';
+		case 'Desktop':
+			return '-desktop';
+		case 'Tablet':
+			return '-tablet';
+		default:
+			return '-phone';
+	}
+};
+var _debois$elm_mdl$Material_Grid$size = F2(
+	function (device, k) {
+		var c = function () {
+			var _p2 = device;
+			switch (_p2.ctor) {
+				case 'All':
+					return A3(_debois$elm_mdl$Material_Grid$clip, 1, 12, k);
+				case 'Desktop':
+					return A3(_debois$elm_mdl$Material_Grid$clip, 1, 12, k);
+				case 'Tablet':
+					return A3(_debois$elm_mdl$Material_Grid$clip, 1, 8, k);
+				default:
+					return A3(_debois$elm_mdl$Material_Grid$clip, 1, 4, k);
+			}
+		}();
+		return _debois$elm_mdl$Material_Options$cs(
+			A2(
+				_elm_lang$core$Basics_ops['++'],
+				'mdl-cell--',
+				A2(
+					_elm_lang$core$Basics_ops['++'],
+					_elm_lang$core$Basics$toString(c),
+					A2(
+						_elm_lang$core$Basics_ops['++'],
+						'-col',
+						_debois$elm_mdl$Material_Grid$suffix(device)))));
+	});
+var _debois$elm_mdl$Material_Grid$offset = F2(
+	function (device, k) {
+		var c = function () {
+			var _p3 = device;
+			switch (_p3.ctor) {
+				case 'All':
+					return A3(_debois$elm_mdl$Material_Grid$clip, 1, 11, k);
+				case 'Desktop':
+					return A3(_debois$elm_mdl$Material_Grid$clip, 1, 11, k);
+				case 'Tablet':
+					return A3(_debois$elm_mdl$Material_Grid$clip, 1, 7, k);
+				default:
+					return A3(_debois$elm_mdl$Material_Grid$clip, 1, 3, k);
+			}
+		}();
+		return _debois$elm_mdl$Material_Options$cs(
+			A2(
+				_elm_lang$core$Basics_ops['++'],
+				'mdl-cell--',
+				A2(
+					_elm_lang$core$Basics_ops['++'],
+					_elm_lang$core$Basics$toString(c),
+					A2(
+						_elm_lang$core$Basics_ops['++'],
+						'-offset',
+						_debois$elm_mdl$Material_Grid$suffix(device)))));
+	});
+var _debois$elm_mdl$Material_Grid$hide = function (device) {
+	return _debois$elm_mdl$Material_Options$cs(
+		function () {
+			var _p4 = device;
+			if (_p4.ctor === 'All') {
+				return '';
+			} else {
+				return A2(
+					_elm_lang$core$Basics_ops['++'],
+					'mdl-cell--hide-',
+					_debois$elm_mdl$Material_Grid$suffix(device));
+			}
+		}());
+};
+var _debois$elm_mdl$Material_Grid$order = F2(
+	function (device, n) {
+		return _debois$elm_mdl$Material_Options$cs(
+			A2(
+				_elm_lang$core$Basics_ops['++'],
+				'mdl-cell--order-',
+				A2(
+					_elm_lang$core$Basics_ops['++'],
+					_elm_lang$core$Basics$toString(
+						A3(_debois$elm_mdl$Material_Grid$clip, 1, 12, n)),
+					_debois$elm_mdl$Material_Grid$suffix(device))));
+	});
+var _debois$elm_mdl$Material_Grid$grid = F2(
+	function (styling, cells) {
+		return A2(
+			_debois$elm_mdl$Material_Options$div,
+			A2(
+				_elm_lang$core$List_ops['::'],
+				_debois$elm_mdl$Material_Options$cs('mdl-grid'),
+				styling),
+			A2(
+				_elm_lang$core$List$map,
+				function (_p5) {
+					var _p6 = _p5;
+					return _p6._0;
+				},
+				cells));
+	});
+var _debois$elm_mdl$Material_Grid$maxWidth = function (w) {
+	return A2(_debois$elm_mdl$Material_Options$css, 'max-width', w);
+};
+var _debois$elm_mdl$Material_Grid$noSpacing = _debois$elm_mdl$Material_Options$cs('mdl-grid--no-spacing');
+var _debois$elm_mdl$Material_Grid$Phone = {ctor: 'Phone'};
+var _debois$elm_mdl$Material_Grid$Tablet = {ctor: 'Tablet'};
+var _debois$elm_mdl$Material_Grid$Desktop = {ctor: 'Desktop'};
+var _debois$elm_mdl$Material_Grid$All = {ctor: 'All'};
+var _debois$elm_mdl$Material_Grid$Cell = function (a) {
+	return {ctor: 'Cell', _0: a};
+};
+var _debois$elm_mdl$Material_Grid$cell = F2(
+	function (styling, elms) {
+		return _debois$elm_mdl$Material_Grid$Cell(
+			A2(
+				_debois$elm_mdl$Material_Options$div,
+				A2(
+					_elm_lang$core$List_ops['::'],
+					_debois$elm_mdl$Material_Options$cs('mdl-cell'),
+					styling),
+				elms));
+	});
+var _debois$elm_mdl$Material_Grid$Bottom = {ctor: 'Bottom'};
+var _debois$elm_mdl$Material_Grid$Middle = {ctor: 'Middle'};
+var _debois$elm_mdl$Material_Grid$Top = {ctor: 'Top'};
+
+var _debois$elm_mdl$Material_List$action2 = _debois$elm_mdl$Material_Options$cs('mdl-list__item-secondary-action');
+var _debois$elm_mdl$Material_List$info2 = function (options) {
+	return _debois$elm_mdl$Material_Options$span(
+		A2(
+			_elm_lang$core$List_ops['::'],
+			_debois$elm_mdl$Material_Options$cs('mdl-list__item-secondary-info'),
+			options));
+};
+var _debois$elm_mdl$Material_List$content2 = function (options) {
+	return _debois$elm_mdl$Material_Options$span(
+		A2(
+			_elm_lang$core$List_ops['::'],
+			_debois$elm_mdl$Material_Options$cs('mdl-list__item-secondary-content'),
+			options));
+};
+var _debois$elm_mdl$Material_List$subtitle = function (options) {
+	return _debois$elm_mdl$Material_Options$span(
+		A2(
+			_elm_lang$core$List_ops['::'],
+			_debois$elm_mdl$Material_Options$cs('mdl-list__item-sub-title'),
+			options));
+};
+var _debois$elm_mdl$Material_List$body = function (options) {
+	return _debois$elm_mdl$Material_Options$span(
+		A2(
+			_elm_lang$core$List_ops['::'],
+			_debois$elm_mdl$Material_Options$cs('mdl-list__item-text-body'),
+			options));
+};
+var _debois$elm_mdl$Material_List$icon = F2(
+	function (i, options) {
+		return A2(
+			_debois$elm_mdl$Material_Icon$view,
+			i,
+			A2(
+				_elm_lang$core$List_ops['::'],
+				_debois$elm_mdl$Material_Options$cs('mdl-list__item-icon'),
+				options));
+	});
+var _debois$elm_mdl$Material_List$avatar = _debois$elm_mdl$Material_Options$cs('mdl-list__item-avatar');
+var _debois$elm_mdl$Material_List$avatarImage = F2(
+	function (src, options) {
+		return A4(
+			_debois$elm_mdl$Material_Options$styled$,
+			_elm_lang$html$Html$img,
+			A2(_elm_lang$core$List_ops['::'], _debois$elm_mdl$Material_List$avatar, options),
+			_elm_lang$core$Native_List.fromArray(
+				[
+					_elm_lang$html$Html_Attributes$src(src)
+				]),
+			_elm_lang$core$Native_List.fromArray(
+				[]));
+	});
+var _debois$elm_mdl$Material_List$avatarIcon = F2(
+	function (i, options) {
+		return A2(
+			_debois$elm_mdl$Material_Options$div,
+			_elm_lang$core$Native_List.fromArray(
+				[
+					_debois$elm_mdl$Material_Options$center,
+					_debois$elm_mdl$Material_Options$many(options),
+					_debois$elm_mdl$Material_List$avatar
+				]),
+			_elm_lang$core$Native_List.fromArray(
+				[
+					_debois$elm_mdl$Material_Icon$i(i)
+				]));
+	});
+var _debois$elm_mdl$Material_List$content = function (options) {
+	return _debois$elm_mdl$Material_Options$span(
+		A2(
+			_elm_lang$core$List_ops['::'],
+			_debois$elm_mdl$Material_Options$cs('mdl-list__item-primary-content'),
+			options));
+};
+var _debois$elm_mdl$Material_List$withSubtitle = _debois$elm_mdl$Material_Options$cs('mdl-list__item--two-line');
+var _debois$elm_mdl$Material_List$withBody = _debois$elm_mdl$Material_Options$cs('mdl-list__item--three-line');
+var _debois$elm_mdl$Material_List$li = function (options) {
+	return A2(
+		_debois$elm_mdl$Material_Options$styled,
+		_elm_lang$html$Html$li,
+		A2(
+			_elm_lang$core$List_ops['::'],
+			_debois$elm_mdl$Material_Options$cs('mdl-list__item'),
+			options));
+};
+var _debois$elm_mdl$Material_List$ul = function (options) {
+	return A2(
+		_debois$elm_mdl$Material_Options$styled,
+		_elm_lang$html$Html$ul,
+		A2(
+			_elm_lang$core$List_ops['::'],
+			_debois$elm_mdl$Material_Options$cs('mdl-list'),
+			options));
+};
+
+var _debois$elm_mdl$Material_Typography$uppercase = _debois$elm_mdl$Material_Options$cs('mdl-typography--text-uppercase');
+var _debois$elm_mdl$Material_Typography$lowercase = _debois$elm_mdl$Material_Options$cs('mdl-typography--text-lowercase');
+var _debois$elm_mdl$Material_Typography$capitalize = _debois$elm_mdl$Material_Options$cs('mdl-typography--text-capitalize');
+var _debois$elm_mdl$Material_Typography$justify = _debois$elm_mdl$Material_Options$cs('mdl-typography--text-justify');
+var _debois$elm_mdl$Material_Typography$right = _debois$elm_mdl$Material_Options$cs('mdl-typography--text-right');
+var _debois$elm_mdl$Material_Typography$left = _debois$elm_mdl$Material_Options$cs('mdl-typography--text-left');
+var _debois$elm_mdl$Material_Typography$center = _debois$elm_mdl$Material_Options$cs('mdl-typography--text-center');
+var _debois$elm_mdl$Material_Typography$tableStriped = _debois$elm_mdl$Material_Options$cs('mdl-typography--table-striped');
+var _debois$elm_mdl$Material_Typography$nowrap = _debois$elm_mdl$Material_Options$cs('mdl-typography--text-nowrap');
+var _debois$elm_mdl$Material_Typography$contrast = function (x) {
+	return A2(
+		_debois$elm_mdl$Material_Options$css,
+		'opacity',
+		_elm_lang$core$Basics$toString(x));
+};
+var _debois$elm_mdl$Material_Typography$menu = _debois$elm_mdl$Material_Options$cs('mdl-typography--menu-color-contrast');
+var _debois$elm_mdl$Material_Typography$button = _debois$elm_mdl$Material_Options$cs('mdl-typography--button-color-contrast');
+var _debois$elm_mdl$Material_Typography$caption = _debois$elm_mdl$Material_Options$cs('mdl-typography--caption-force-preferred-font-color-contrast');
+var _debois$elm_mdl$Material_Typography$body2 = _debois$elm_mdl$Material_Options$cs('mdl-typography--body-2-force-preferred-font-color-contrast');
+var _debois$elm_mdl$Material_Typography$body1 = _debois$elm_mdl$Material_Options$cs('mdl-typography--body-1-force-preferred-font-color-contrast');
+var _debois$elm_mdl$Material_Typography$subhead = _debois$elm_mdl$Material_Options$cs('mdl-typography--subhead-color-contrast');
+var _debois$elm_mdl$Material_Typography$title = _debois$elm_mdl$Material_Options$cs('mdl-typography--title-color-contrast');
+var _debois$elm_mdl$Material_Typography$headline = _debois$elm_mdl$Material_Options$cs('mdl-typography--headline-color-contrast');
+var _debois$elm_mdl$Material_Typography$display4 = _debois$elm_mdl$Material_Options$cs('mdl-typography--display-4-color-contrast');
+var _debois$elm_mdl$Material_Typography$display3 = _debois$elm_mdl$Material_Options$cs('mdl-typography--display-3-color-contrast');
+var _debois$elm_mdl$Material_Typography$display2 = _debois$elm_mdl$Material_Options$cs('mdl-typography--display-2-color-contrast');
+var _debois$elm_mdl$Material_Typography$display1 = _debois$elm_mdl$Material_Options$cs('mdl-typography--display-1-color-contrast');
+
+var _user$project$Inventory$tabs = {
+	ctor: '_Tuple2',
+	_0: _elm_lang$core$Native_List.fromArray(
+		[
+			A2(
+			_debois$elm_mdl$Material_Options$div,
+			_elm_lang$core$Native_List.fromArray(
+				[]),
+			_elm_lang$core$Native_List.fromArray(
+				[
+					_debois$elm_mdl$Material_Icon$i('info_outline'),
+					_elm_lang$html$Html$text('About tabs')
+				])),
+			A2(
+			_debois$elm_mdl$Material_Options$span,
+			_elm_lang$core$Native_List.fromArray(
+				[]),
+			_elm_lang$core$Native_List.fromArray(
+				[
+					_elm_lang$html$Html$text('Tab 2')
+				]))
+		]),
+	_1: _elm_lang$core$Native_List.fromArray(
+		[])
+};
+var _user$project$Inventory$drawer = _elm_lang$core$Native_List.fromArray(
+	[
+		A2(
+		_debois$elm_mdl$Material_Layout$title,
+		_elm_lang$core$Native_List.fromArray(
+			[]),
+		_elm_lang$core$Native_List.fromArray(
+			[
+				_elm_lang$html$Html$text('Hello Drawer')
+			])),
+		A2(
+		_debois$elm_mdl$Material_Layout$navigation,
+		_elm_lang$core$Native_List.fromArray(
+			[]),
+		_elm_lang$core$Native_List.fromArray(
+			[
+				A2(
+				_debois$elm_mdl$Material_Layout$link,
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_debois$elm_mdl$Material_Layout$href('http://google.com')
+					]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html$text('Hello Link')
+					]))
+			]))
+	]);
 var _user$project$Inventory$header = function (model) {
 	return _elm_lang$core$Native_List.fromArray(
 		[
 			A2(
 			_debois$elm_mdl$Material_Layout$row,
 			_elm_lang$core$Native_List.fromArray(
-				[]),
+				[
+					A2(_debois$elm_mdl$Material_Options$css, 'transition', 'height 333ms ease-in-out 0s')
+				]),
 			_elm_lang$core$Native_List.fromArray(
 				[
+					A2(
+					_debois$elm_mdl$Material_Options$div,
+					_elm_lang$core$Native_List.fromArray(
+						[
+							A2(_debois$elm_mdl$Material_Options$css, 'margin-right', '10px'),
+							A2(_debois$elm_mdl$Material_Options$css, 'font-size', '30px')
+						]),
+					_elm_lang$core$Native_List.fromArray(
+						[
+							_debois$elm_mdl$Material_Icon$i('local_shipping')
+						])),
 					A2(
 					_debois$elm_mdl$Material_Layout$title,
 					_elm_lang$core$Native_List.fromArray(
 						[]),
 					_elm_lang$core$Native_List.fromArray(
 						[
-							_elm_lang$html$Html$text('Hello Header')
+							_elm_lang$html$Html$text('Inventory IO')
+						])),
+					_debois$elm_mdl$Material_Layout$spacer,
+					A2(
+					_debois$elm_mdl$Material_Layout$navigation,
+					_elm_lang$core$Native_List.fromArray(
+						[]),
+					_elm_lang$core$Native_List.fromArray(
+						[
+							A2(
+							_debois$elm_mdl$Material_Layout$link,
+							_elm_lang$core$Native_List.fromArray(
+								[
+									_debois$elm_mdl$Material_Layout$href('https://github.com')
+								]),
+							_elm_lang$core$Native_List.fromArray(
+								[
+									A2(
+									_elm_lang$html$Html$span,
+									_elm_lang$core$Native_List.fromArray(
+										[]),
+									_elm_lang$core$Native_List.fromArray(
+										[
+											_elm_lang$html$Html$text('link 1')
+										]))
+								])),
+							A2(
+							_debois$elm_mdl$Material_Layout$link,
+							_elm_lang$core$Native_List.fromArray(
+								[
+									_debois$elm_mdl$Material_Layout$href('https://github.com')
+								]),
+							_elm_lang$core$Native_List.fromArray(
+								[
+									A2(
+									_elm_lang$html$Html$span,
+									_elm_lang$core$Native_List.fromArray(
+										[]),
+									_elm_lang$core$Native_List.fromArray(
+										[
+											_elm_lang$html$Html$text('link 2')
+										]))
+								]))
 						]))
 				]))
 		]);
 };
+var _user$project$Inventory$iconLink = F2(
+	function (name, icon) {
+		return A2(
+			_debois$elm_mdl$Material_Layout$link,
+			_elm_lang$core$Native_List.fromArray(
+				[
+					_debois$elm_mdl$Material_Layout$href(
+					A2(_elm_lang$core$Basics_ops['++'], '#', name)),
+					A2(_debois$elm_mdl$Material_Options$css, 'display', 'block'),
+					A2(_debois$elm_mdl$Material_Options$css, 'width', '100%')
+				]),
+			_elm_lang$core$Native_List.fromArray(
+				[
+					A2(
+					_debois$elm_mdl$Material_List$content,
+					_elm_lang$core$Native_List.fromArray(
+						[_debois$elm_mdl$Material_Typography$capitalize]),
+					_elm_lang$core$Native_List.fromArray(
+						[
+							A2(
+							_debois$elm_mdl$Material_List$icon,
+							icon,
+							_elm_lang$core$Native_List.fromArray(
+								[])),
+							_elm_lang$html$Html$text(name)
+						]))
+				]));
+	});
+var _user$project$Inventory$sidebar = A2(
+	_debois$elm_mdl$Material_List$ul,
+	_elm_lang$core$Native_List.fromArray(
+		[]),
+	_elm_lang$core$Native_List.fromArray(
+		[
+			A2(
+			_debois$elm_mdl$Material_List$li,
+			_elm_lang$core$Native_List.fromArray(
+				[]),
+			_elm_lang$core$Native_List.fromArray(
+				[
+					A2(_user$project$Inventory$iconLink, 'dashboard', 'dashboard')
+				])),
+			A2(
+			_debois$elm_mdl$Material_List$li,
+			_elm_lang$core$Native_List.fromArray(
+				[]),
+			_elm_lang$core$Native_List.fromArray(
+				[
+					A2(_user$project$Inventory$iconLink, 'inventory', 'local_shipping')
+				]))
+		]));
+var _user$project$Inventory$top = A2(
+	_debois$elm_mdl$Material_Grid$grid,
+	_elm_lang$core$Native_List.fromArray(
+		[]),
+	_elm_lang$core$Native_List.fromArray(
+		[
+			A2(
+			_debois$elm_mdl$Material_Grid$cell,
+			_elm_lang$core$Native_List.fromArray(
+				[
+					A2(_debois$elm_mdl$Material_Grid$size, _debois$elm_mdl$Material_Grid$All, 3)
+				]),
+			_elm_lang$core$Native_List.fromArray(
+				[_user$project$Inventory$sidebar])),
+			A2(
+			_debois$elm_mdl$Material_Grid$cell,
+			_elm_lang$core$Native_List.fromArray(
+				[
+					A2(_debois$elm_mdl$Material_Grid$size, _debois$elm_mdl$Material_Grid$All, 9)
+				]),
+			_elm_lang$core$Native_List.fromArray(
+				[
+					_elm_lang$html$Html$text('Content')
+				]))
+		]));
 var _user$project$Inventory$update = F2(
 	function (msg, model) {
 		var _p0 = msg;
@@ -13436,71 +13898,48 @@ var _user$project$Inventory$update = F2(
 				return A2(_debois$elm_mdl$Material$update, _p0._0, model);
 		}
 	});
-var _user$project$Inventory$model = {count: 0, mdl: _debois$elm_mdl$Material$model};
-var _user$project$Inventory$Model = F2(
-	function (a, b) {
-		return {count: a, mdl: b};
+var _user$project$Inventory$model = {mdl: _debois$elm_mdl$Material$model, count: 0, selectedTab: 0};
+var _user$project$Inventory$Model = F3(
+	function (a, b, c) {
+		return {mdl: a, count: b, selectedTab: c};
 	});
 var _user$project$Inventory$Mdl = function (a) {
 	return {ctor: 'Mdl', _0: a};
 };
-var _user$project$Inventory$Reset = {ctor: 'Reset'};
-var _user$project$Inventory$Increase = {ctor: 'Increase'};
 var _user$project$Inventory$view = function (model) {
-	return A2(
-		_elm_lang$html$Html$div,
+	return A4(
+		_debois$elm_mdl$Material_Layout$render,
+		_user$project$Inventory$Mdl,
+		model.mdl,
 		_elm_lang$core$Native_List.fromArray(
 			[
-				_elm_lang$html$Html_Attributes$style(
-				_elm_lang$core$Native_List.fromArray(
-					[
-						{ctor: '_Tuple2', _0: 'padding', _1: '2rem'}
-					]))
+				_debois$elm_mdl$Material_Layout$selectedTab(model.selectedTab),
+				_debois$elm_mdl$Material_Layout$fixedHeader
 			]),
-		_elm_lang$core$Native_List.fromArray(
-			[
-				_elm_lang$html$Html$text(
-				A2(
-					_elm_lang$core$Basics_ops['++'],
-					'Current count: ',
-					_elm_lang$core$Basics$toString(model.count))),
-				A5(
-				_debois$elm_mdl$Material_Button$render,
-				_user$project$Inventory$Mdl,
-				_elm_lang$core$Native_List.fromArray(
-					[0]),
-				model.mdl,
-				_elm_lang$core$Native_List.fromArray(
-					[
-						_debois$elm_mdl$Material_Button$onClick(_user$project$Inventory$Increase),
-						A2(_debois$elm_mdl$Material_Options$css, 'margin', '0 24px')
-					]),
-				_elm_lang$core$Native_List.fromArray(
-					[
-						_elm_lang$html$Html$text('Increase')
-					])),
-				A5(
-				_debois$elm_mdl$Material_Button$render,
-				_user$project$Inventory$Mdl,
-				_elm_lang$core$Native_List.fromArray(
-					[1]),
-				model.mdl,
-				_elm_lang$core$Native_List.fromArray(
-					[
-						_debois$elm_mdl$Material_Button$onClick(_user$project$Inventory$Reset)
-					]),
-				_elm_lang$core$Native_List.fromArray(
-					[
-						_elm_lang$html$Html$text('Reset')
-					]))
-			]));
+		{
+			header: _user$project$Inventory$header(model),
+			drawer: _user$project$Inventory$drawer,
+			tabs: {
+				ctor: '_Tuple2',
+				_0: _elm_lang$core$Native_List.fromArray(
+					[]),
+				_1: _elm_lang$core$Native_List.fromArray(
+					[])
+			},
+			main: _elm_lang$core$Native_List.fromArray(
+				[_user$project$Inventory$top])
+		});
 };
 var _user$project$Inventory$main = {
 	main: _elm_lang$html$Html_App$program(
 		{
 			init: {
 				ctor: '_Tuple2',
-				_0: _user$project$Inventory$model,
+				_0: _elm_lang$core$Native_Utils.update(
+					_user$project$Inventory$model,
+					{
+						mdl: A2(_debois$elm_mdl$Material_Layout$setTabsWidth, 1384, _user$project$Inventory$model.mdl)
+					}),
 				_1: _debois$elm_mdl$Material_Layout$sub0(_user$project$Inventory$Mdl)
 			},
 			view: _user$project$Inventory$view,
@@ -13508,6 +13947,8 @@ var _user$project$Inventory$main = {
 			update: _user$project$Inventory$update
 		})
 };
+var _user$project$Inventory$Reset = {ctor: 'Reset'};
+var _user$project$Inventory$Increase = {ctor: 'Increase'};
 
 var Elm = {};
 Elm['Inventory'] = Elm['Inventory'] || {};

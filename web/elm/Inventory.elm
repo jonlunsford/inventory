@@ -1,18 +1,67 @@
 module Inventory exposing(..)
 
-import Html.App as App
-import Html exposing (..)
-import Html.Attributes exposing (href, class, style)
+import Dict exposing (Dict)
+import Html exposing (Html, Attribute, a, div, hr, input, span, text)
+import Html.Attributes exposing (..)
+import Html.Events exposing (..)
+import Http
+import Json.Decode as Json exposing ((:=))
+import Navigation
+import String
+import Task
+import UrlParser exposing (Parser, (</>), format, int, oneOf, s, string)
 
 import Material
-import Material.List as Lists
 import Material.Layout as Layout
-import Material.Button as Button
-import Material.Tabs as Tabs
+import Material.List as Lists
+import Material.Options as Options exposing (css, when)
 import Material.Icon as Icon
-import Material.Typography as Typo
-import Material.Options as Options exposing (Style, css, cs)
-import Material.Grid exposing (grid, cell, size, Device(..))
+import Material.Typography as Typography
+import Material.Grid as Grid exposing (grid, cell, size, Device(..))
+
+import Pages.Dashboard as Dashboard
+import Pages.Catalog as Catalog
+
+
+
+main =
+  Navigation.program (Navigation.makeParser hashParser)
+    { init = init
+    , view = view
+    , update = update
+    , urlUpdate = urlUpdate
+    , subscriptions = subscriptions
+    }
+
+
+
+-- URL PARSERS - check out evancz/url-parser for fancier URL parsing
+
+
+toHash : Page -> String
+toHash page =
+  case page of
+    Dashboard ->
+      "#dashboard"
+
+    Catalog ->
+      "#catalog"
+
+
+hashParser : Navigation.Location -> Result String Page
+hashParser location =
+  UrlParser.parse identity pageParser (String.dropLeft 1 location.hash)
+
+
+type Page = Dashboard | Catalog
+
+
+pageParser : Parser (Page -> a) a
+pageParser =
+  oneOf
+    [ format Dashboard (s "dashboard")
+    , format Catalog (s "catalog")
+    ]
 
 
 -- MODEL
@@ -20,148 +69,156 @@ import Material.Grid exposing (grid, cell, size, Device(..))
 
 type alias Model =
   { mdl : Material.Model
-  , count : Int
-  , selectedTab : Int
-      -- Boilerplate: model store for any and all Mdl components you use.
+  , page : Page
   }
 
 
 model : Model
 model =
   { mdl = Material.model
-  , count = 0
-  , selectedTab = 0
+  , page = Dashboard
   }
 
-
--- ACTION, UPDATE
-
-
-type Msg
-  = Increase
-  | Reset
-  | Mdl (Material.Msg Msg)
-      -- Boilerplate: Msg clause for internal Mdl messages.
+init : Result String Page -> (Model, Cmd Msg)
+init result =
+  urlUpdate result model
 
 
+
+-- UPDATE
+
+
+type Msg = Mdl (Material.Msg Msg)
+
+
+{-| A relatively normal update function. The only notable thing here is that we
+are commanding a new URL to be added to the browser history. This changes the
+address bar and lets us use the browser&rsquo;s back button to go back to
+previous pages.
+-}
 update : Msg -> Model -> (Model, Cmd Msg)
 update msg model =
   case msg of
-    Increase ->
-      ( { model | count = model.count + 1 }
+    Mdl msg ->
+      Material.update msg model
+
+
+{-| The URL is turned into a result. If the URL is valid, we just update our
+model to the new count. If it is not a valid URL, we modify the URL to make
+sense.
+-}
+urlUpdate : Result String Page -> Model -> (Model, Cmd Msg)
+urlUpdate result model =
+  case Debug.log "result" result of
+    Err _ ->
+      ( model, Navigation.modifyUrl (toHash model.page) )
+
+    Ok page ->
+      ( { model | page = page }
       , Cmd.none
       )
 
-    Reset ->
-      ( { model | count = 0 }
-      , Cmd.none
-      )
 
-    -- Boilerplate: Mdl action handler.
-    Mdl msg' ->
-      Material.update msg' model
+
+
+
+-- SUBSCRIPTIONS
+
+
+subscriptions : Model -> Sub Msg
+subscriptions model =
+  Sub.none
+
 
 
 -- VIEW
 
-type alias Mdl =
-  Material.Model
-
-iconLink : String -> String -> Html Msg
-iconLink name icon =
-  Layout.link
-    [ Layout.href <| "#" ++ name
-    , css "display" "block"
-    , css "width" "100%"
-    ]
-    [ Lists.content [ Typo.capitalize ]
-        [ Lists.icon icon []
-        , text name
-        ]
-    ]
-
-
-
-top : Html Msg
-top =
-  grid []
-    [ cell [ size All 3 ] [ sidebar ]
-    , cell [ size All 9 ] [ text "Content" ]
-    ]
-
-sidebar : Html Msg
-sidebar =
-  Lists.ul []
-    [ Lists.li []
-        [ iconLink "dashboard" "dashboard" ]
-    , Lists.li []
-        [ iconLink "inventory" "local_shipping" ]
-    ]
-
-
-header : Model -> List (Html Msg)
-header model =
-  [ Layout.row
-    [ css "transition" "height 333ms ease-in-out 0s" ]
-    [ Options.div
-      [ css "margin-right" "10px"
-      , css "font-size" "30px"
-      ]
-      [ Icon.i "local_shipping" ]
-    , Layout.title [] [ text "Inventory IO" ]
-    , Layout.spacer
-    , Layout.navigation []
-        [ Layout.link
-            [ Layout.href "https://github.com" ]
-            [ span [] [ text "link 1" ] ]
-        , Layout.link
-            [ Layout.href "https://github.com" ]
-            [ span [] [ text "link 2" ] ]
-        ]
-    ]
-  ]
-
-drawer : List (Html Msg)
-drawer =
-  [ Layout.title [] [ text "Hello Drawer" ]
-  , Layout.navigation
-    []
-    [ Layout.link
-      [ Layout.href "http://google.com" ]
-      [ text "Hello Link" ]
-    ]
-  ]
-
-tabs : (List (Html Msg), List (Style Msg))
-tabs =
-  (
-    [ Options.div [] [ Icon.i "info_outline", text "About tabs" ]
-    , Options.span [] [ text "Tab 2" ]
-    ]
-    ,
-    []
-  )
 
 view : Model -> Html Msg
 view model =
   Layout.render Mdl model.mdl
-    [ Layout.selectedTab model.selectedTab
-    , Layout.fixedHeader
-    ]
-    { header = header model
+    [ Layout.fixedHeader ]
+    { header = header
     , drawer = drawer
-    , tabs = ([],[])
-    , main = [ top ]
+    , tabs = ([] ,[])
+    , main = [ top model ]
     }
 
-main : Program Never
-main =
-  App.program
-    { init =
-      ( { model | mdl = Layout.setTabsWidth 1384 model.mdl }
-        , Layout.sub0 Mdl
-      )
-    , view = view
-    , subscriptions = Material.subscriptions Mdl
-    , update = update
-    }
+viewLink : Page -> String -> Html msg
+viewLink page description =
+  a [ style [ ("padding", "0 20px") ], href (toHash page) ] [ text description]
+
+top : Model -> Html Msg
+top model =
+  grid []
+    [ sidebar
+    , viewPage model
+    ]
+
+viewPage : Model -> Grid.Cell a
+viewPage model =
+  case model.page of
+    Dashboard ->
+      Dashboard.view
+
+    Catalog ->
+      Catalog.view
+
+drawer : List (Html Msg)
+drawer =
+  [ Layout.title [] [ text "Example drawer" ]
+  , Layout.navigation
+    []
+    [  Layout.link
+        [ Layout.href "https://github.com/debois/elm-mdl" ]
+        [ text "github" ]
+    , Layout.link
+        [ Layout.href "http://package.elm-lang.org/packages/debois/elm-mdl/latest/" ]
+        [ text "elm-package" ]
+    ]
+  ]
+
+header : List (Html Msg)
+header =
+  [ Layout.row
+      [ ]
+      [ Layout.title [] [ text "elm-mdl" ]
+      , Layout.spacer
+      , Layout.navigation []
+          [ Layout.link
+              [ Layout.href "https://github.com/debois/elm-mdl"]
+              [ span [] [text "github"] ]
+          , Layout.link
+              [ Layout.href "http://package.elm-lang.org/packages/debois/elm-mdl/latest/" ]
+              [ text "elm-package" ]
+          ]
+      ]
+  ]
+
+sidebar : Grid.Cell a
+sidebar =
+  cell
+    [ Grid.size All 3 ]
+    [ Lists.ul []
+      [ Lists.li []
+          [ Lists.content []
+              [ Lists.icon "inbox" []
+              , text "Inbox"
+              ]
+          ]
+      , Lists.li []
+          [ Lists.content []
+              [ Lists.icon "send" []
+              , text "Sent mail"
+              ]
+          ]
+      , Lists.li []
+          [ Lists.content []
+              [ Lists.icon "delete" []
+              , text "Trash"
+              ]
+          ]
+      ]
+    ]
+
+

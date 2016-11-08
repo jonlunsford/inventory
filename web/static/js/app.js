@@ -20,5 +20,5 @@ import "phoenix_html"
 
 // import socket from "./socket"
 
-const elmDiv = document.getElementById('elm-main')
-    , elmApp = Elm.Inventory.embed(elmDiv)
+//const elmDiv = document.getElementById('elm-main')
+    //, elmApp = Elm.Main.embed(elmDiv)

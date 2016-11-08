@@ -13670,6 +13670,303 @@ var _debois$elm_mdl$Material_Typography$display3 = _debois$elm_mdl$Material_Opti
 var _debois$elm_mdl$Material_Typography$display2 = _debois$elm_mdl$Material_Options$cs('mdl-typography--display-2-color-contrast');
 var _debois$elm_mdl$Material_Typography$display1 = _debois$elm_mdl$Material_Options$cs('mdl-typography--display-1-color-contrast');
 
+//import Result //
+
+var _elm_lang$core$Native_Date = function() {
+
+function fromString(str)
+{
+	var date = new Date(str);
+	return isNaN(date.getTime())
+		? _elm_lang$core$Result$Err('Unable to parse \'' + str + '\' as a date. Dates must be in the ISO 8601 format.')
+		: _elm_lang$core$Result$Ok(date);
+}
+
+var dayTable = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+var monthTable =
+	['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+	 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+
+return {
+	fromString: fromString,
+	year: function(d) { return d.getFullYear(); },
+	month: function(d) { return { ctor: monthTable[d.getMonth()] }; },
+	day: function(d) { return d.getDate(); },
+	hour: function(d) { return d.getHours(); },
+	minute: function(d) { return d.getMinutes(); },
+	second: function(d) { return d.getSeconds(); },
+	millisecond: function(d) { return d.getMilliseconds(); },
+	toTime: function(d) { return d.getTime(); },
+	fromTime: function(t) { return new Date(t); },
+	dayOfWeek: function(d) { return { ctor: dayTable[d.getDay()] }; }
+};
+
+}();
+var _elm_lang$core$Date$millisecond = _elm_lang$core$Native_Date.millisecond;
+var _elm_lang$core$Date$second = _elm_lang$core$Native_Date.second;
+var _elm_lang$core$Date$minute = _elm_lang$core$Native_Date.minute;
+var _elm_lang$core$Date$hour = _elm_lang$core$Native_Date.hour;
+var _elm_lang$core$Date$dayOfWeek = _elm_lang$core$Native_Date.dayOfWeek;
+var _elm_lang$core$Date$day = _elm_lang$core$Native_Date.day;
+var _elm_lang$core$Date$month = _elm_lang$core$Native_Date.month;
+var _elm_lang$core$Date$year = _elm_lang$core$Native_Date.year;
+var _elm_lang$core$Date$fromTime = _elm_lang$core$Native_Date.fromTime;
+var _elm_lang$core$Date$toTime = _elm_lang$core$Native_Date.toTime;
+var _elm_lang$core$Date$fromString = _elm_lang$core$Native_Date.fromString;
+var _elm_lang$core$Date$now = A2(_elm_lang$core$Task$map, _elm_lang$core$Date$fromTime, _elm_lang$core$Time$now);
+var _elm_lang$core$Date$Date = {ctor: 'Date'};
+var _elm_lang$core$Date$Sun = {ctor: 'Sun'};
+var _elm_lang$core$Date$Sat = {ctor: 'Sat'};
+var _elm_lang$core$Date$Fri = {ctor: 'Fri'};
+var _elm_lang$core$Date$Thu = {ctor: 'Thu'};
+var _elm_lang$core$Date$Wed = {ctor: 'Wed'};
+var _elm_lang$core$Date$Tue = {ctor: 'Tue'};
+var _elm_lang$core$Date$Mon = {ctor: 'Mon'};
+var _elm_lang$core$Date$Dec = {ctor: 'Dec'};
+var _elm_lang$core$Date$Nov = {ctor: 'Nov'};
+var _elm_lang$core$Date$Oct = {ctor: 'Oct'};
+var _elm_lang$core$Date$Sep = {ctor: 'Sep'};
+var _elm_lang$core$Date$Aug = {ctor: 'Aug'};
+var _elm_lang$core$Date$Jul = {ctor: 'Jul'};
+var _elm_lang$core$Date$Jun = {ctor: 'Jun'};
+var _elm_lang$core$Date$May = {ctor: 'May'};
+var _elm_lang$core$Date$Apr = {ctor: 'Apr'};
+var _elm_lang$core$Date$Mar = {ctor: 'Mar'};
+var _elm_lang$core$Date$Feb = {ctor: 'Feb'};
+var _elm_lang$core$Date$Jan = {ctor: 'Jan'};
+
+var _elm_lang$core$Set$foldr = F3(
+	function (f, b, _p0) {
+		var _p1 = _p0;
+		return A3(
+			_elm_lang$core$Dict$foldr,
+			F3(
+				function (k, _p2, b) {
+					return A2(f, k, b);
+				}),
+			b,
+			_p1._0);
+	});
+var _elm_lang$core$Set$foldl = F3(
+	function (f, b, _p3) {
+		var _p4 = _p3;
+		return A3(
+			_elm_lang$core$Dict$foldl,
+			F3(
+				function (k, _p5, b) {
+					return A2(f, k, b);
+				}),
+			b,
+			_p4._0);
+	});
+var _elm_lang$core$Set$toList = function (_p6) {
+	var _p7 = _p6;
+	return _elm_lang$core$Dict$keys(_p7._0);
+};
+var _elm_lang$core$Set$size = function (_p8) {
+	var _p9 = _p8;
+	return _elm_lang$core$Dict$size(_p9._0);
+};
+var _elm_lang$core$Set$member = F2(
+	function (k, _p10) {
+		var _p11 = _p10;
+		return A2(_elm_lang$core$Dict$member, k, _p11._0);
+	});
+var _elm_lang$core$Set$isEmpty = function (_p12) {
+	var _p13 = _p12;
+	return _elm_lang$core$Dict$isEmpty(_p13._0);
+};
+var _elm_lang$core$Set$Set_elm_builtin = function (a) {
+	return {ctor: 'Set_elm_builtin', _0: a};
+};
+var _elm_lang$core$Set$empty = _elm_lang$core$Set$Set_elm_builtin(_elm_lang$core$Dict$empty);
+var _elm_lang$core$Set$singleton = function (k) {
+	return _elm_lang$core$Set$Set_elm_builtin(
+		A2(
+			_elm_lang$core$Dict$singleton,
+			k,
+			{ctor: '_Tuple0'}));
+};
+var _elm_lang$core$Set$insert = F2(
+	function (k, _p14) {
+		var _p15 = _p14;
+		return _elm_lang$core$Set$Set_elm_builtin(
+			A3(
+				_elm_lang$core$Dict$insert,
+				k,
+				{ctor: '_Tuple0'},
+				_p15._0));
+	});
+var _elm_lang$core$Set$fromList = function (xs) {
+	return A3(_elm_lang$core$List$foldl, _elm_lang$core$Set$insert, _elm_lang$core$Set$empty, xs);
+};
+var _elm_lang$core$Set$map = F2(
+	function (f, s) {
+		return _elm_lang$core$Set$fromList(
+			A2(
+				_elm_lang$core$List$map,
+				f,
+				_elm_lang$core$Set$toList(s)));
+	});
+var _elm_lang$core$Set$remove = F2(
+	function (k, _p16) {
+		var _p17 = _p16;
+		return _elm_lang$core$Set$Set_elm_builtin(
+			A2(_elm_lang$core$Dict$remove, k, _p17._0));
+	});
+var _elm_lang$core$Set$union = F2(
+	function (_p19, _p18) {
+		var _p20 = _p19;
+		var _p21 = _p18;
+		return _elm_lang$core$Set$Set_elm_builtin(
+			A2(_elm_lang$core$Dict$union, _p20._0, _p21._0));
+	});
+var _elm_lang$core$Set$intersect = F2(
+	function (_p23, _p22) {
+		var _p24 = _p23;
+		var _p25 = _p22;
+		return _elm_lang$core$Set$Set_elm_builtin(
+			A2(_elm_lang$core$Dict$intersect, _p24._0, _p25._0));
+	});
+var _elm_lang$core$Set$diff = F2(
+	function (_p27, _p26) {
+		var _p28 = _p27;
+		var _p29 = _p26;
+		return _elm_lang$core$Set$Set_elm_builtin(
+			A2(_elm_lang$core$Dict$diff, _p28._0, _p29._0));
+	});
+var _elm_lang$core$Set$filter = F2(
+	function (p, _p30) {
+		var _p31 = _p30;
+		return _elm_lang$core$Set$Set_elm_builtin(
+			A2(
+				_elm_lang$core$Dict$filter,
+				F2(
+					function (k, _p32) {
+						return p(k);
+					}),
+				_p31._0));
+	});
+var _elm_lang$core$Set$partition = F2(
+	function (p, _p33) {
+		var _p34 = _p33;
+		var _p35 = A2(
+			_elm_lang$core$Dict$partition,
+			F2(
+				function (k, _p36) {
+					return p(k);
+				}),
+			_p34._0);
+		var p1 = _p35._0;
+		var p2 = _p35._1;
+		return {
+			ctor: '_Tuple2',
+			_0: _elm_lang$core$Set$Set_elm_builtin(p1),
+			_1: _elm_lang$core$Set$Set_elm_builtin(p2)
+		};
+	});
+
+var _elm_community$json_extra$Json_Decode_Extra$sequence = function (decoders) {
+	return A2(
+		_elm_lang$core$Json_Decode$customDecoder,
+		_elm_lang$core$Json_Decode$list(_elm_lang$core$Json_Decode$value),
+		function (jsonValues) {
+			return (!_elm_lang$core$Native_Utils.eq(
+				_elm_lang$core$List$length(jsonValues),
+				_elm_lang$core$List$length(decoders))) ? _elm_lang$core$Result$Err('Number of decoders does not match number of values') : A3(
+				_elm_lang$core$List$foldr,
+				_elm_lang$core$Result$map2(
+					F2(
+						function (x, y) {
+							return A2(_elm_lang$core$List_ops['::'], x, y);
+						})),
+				_elm_lang$core$Result$Ok(
+					_elm_lang$core$Native_List.fromArray(
+						[])),
+				A3(_elm_lang$core$List$map2, _elm_lang$core$Json_Decode$decodeValue, decoders, jsonValues));
+		});
+};
+var _elm_community$json_extra$Json_Decode_Extra$lazy = function (getDecoder) {
+	return A2(
+		_elm_lang$core$Json_Decode$customDecoder,
+		_elm_lang$core$Json_Decode$value,
+		function (rawValue) {
+			return A2(
+				_elm_lang$core$Json_Decode$decodeValue,
+				getDecoder(
+					{ctor: '_Tuple0'}),
+				rawValue);
+		});
+};
+var _elm_community$json_extra$Json_Decode_Extra$maybeNull = function (decoder) {
+	return _elm_lang$core$Json_Decode$oneOf(
+		_elm_lang$core$Native_List.fromArray(
+			[
+				_elm_lang$core$Json_Decode$null(_elm_lang$core$Maybe$Nothing),
+				A2(_elm_lang$core$Json_Decode$map, _elm_lang$core$Maybe$Just, decoder)
+			]));
+};
+var _elm_community$json_extra$Json_Decode_Extra$withDefault = F2(
+	function (fallback, decoder) {
+		return A2(
+			_elm_lang$core$Json_Decode$andThen,
+			_elm_lang$core$Json_Decode$maybe(decoder),
+			function (_p0) {
+				return _elm_lang$core$Json_Decode$succeed(
+					A2(_elm_lang$core$Maybe$withDefault, fallback, _p0));
+			});
+	});
+var _elm_community$json_extra$Json_Decode_Extra$decodeDictFromTuples = F2(
+	function (keyDecoder, tuples) {
+		var _p1 = tuples;
+		if (_p1.ctor === '[]') {
+			return _elm_lang$core$Json_Decode$succeed(_elm_lang$core$Dict$empty);
+		} else {
+			var _p2 = A2(_elm_lang$core$Json_Decode$decodeString, keyDecoder, _p1._0._0);
+			if (_p2.ctor === 'Ok') {
+				return A2(
+					_elm_lang$core$Json_Decode$andThen,
+					A2(_elm_community$json_extra$Json_Decode_Extra$decodeDictFromTuples, keyDecoder, _p1._1),
+					function (_p3) {
+						return _elm_lang$core$Json_Decode$succeed(
+							A3(_elm_lang$core$Dict$insert, _p2._0, _p1._0._1, _p3));
+					});
+			} else {
+				return _elm_lang$core$Json_Decode$fail(_p2._0);
+			}
+		}
+	});
+var _elm_community$json_extra$Json_Decode_Extra$dict2 = F2(
+	function (keyDecoder, valueDecoder) {
+		return A2(
+			_elm_lang$core$Json_Decode$andThen,
+			_elm_lang$core$Json_Decode$dict(valueDecoder),
+			function (_p4) {
+				return A2(
+					_elm_community$json_extra$Json_Decode_Extra$decodeDictFromTuples,
+					keyDecoder,
+					_elm_lang$core$Dict$toList(_p4));
+			});
+	});
+var _elm_community$json_extra$Json_Decode_Extra$set = function (decoder) {
+	return A2(
+		_elm_lang$core$Json_Decode$andThen,
+		_elm_lang$core$Json_Decode$list(decoder),
+		function (_p5) {
+			return _elm_lang$core$Json_Decode$succeed(
+				_elm_lang$core$Set$fromList(_p5));
+		});
+};
+var _elm_community$json_extra$Json_Decode_Extra$date = A2(_elm_lang$core$Json_Decode$customDecoder, _elm_lang$core$Json_Decode$string, _elm_lang$core$Date$fromString);
+var _elm_community$json_extra$Json_Decode_Extra$apply = _elm_lang$core$Json_Decode$object2(
+	F2(
+		function (x, y) {
+			return x(y);
+		}));
+var _elm_community$json_extra$Json_Decode_Extra_ops = _elm_community$json_extra$Json_Decode_Extra_ops || {};
+_elm_community$json_extra$Json_Decode_Extra_ops['|:'] = _elm_community$json_extra$Json_Decode_Extra$apply;
+
 var _elm_lang$navigation$Native_Navigation = function() {
 
 function go(n)
@@ -14553,50 +14850,505 @@ var _evancz$url_parser$UrlParser$format = F2(
 				}));
 	});
 
-var _user$project$Pages_Dashboard$view = A2(
-	_debois$elm_mdl$Material_Grid$cell,
+var _user$project$ServerClient$encodeBucket = function (a) {
+	return A2(
+		_elm_lang$core$Json_Encode$encode,
+		0,
+		_elm_lang$core$Json_Encode$object(
+			_elm_lang$core$Native_List.fromArray(
+				[
+					{
+					ctor: '_Tuple2',
+					_0: 'id',
+					_1: _elm_lang$core$Json_Encode$int(a.id)
+				},
+					{
+					ctor: '_Tuple2',
+					_0: 'name',
+					_1: _elm_lang$core$Json_Encode$string(a.name)
+				},
+					{
+					ctor: '_Tuple2',
+					_0: 'companyId',
+					_1: _elm_lang$core$Json_Encode$int(a.companyId)
+				}
+				])));
+};
+var _user$project$ServerClient$baseUrl = 'http://localhost:4000/api/v1';
+var _user$project$ServerClient$deleteBucket = F3(
+	function (id, errorMsg, msg) {
+		return A3(
+			_elm_lang$core$Task$perform,
+			function (_p0) {
+				return errorMsg;
+			},
+			function (_p1) {
+				return msg;
+			},
+			A2(
+				_evancz$elm_http$Http$send,
+				_evancz$elm_http$Http$defaultSettings,
+				{
+					verb: 'DELETE',
+					url: A2(
+						_elm_lang$core$Basics_ops['++'],
+						_user$project$ServerClient$baseUrl,
+						A2(
+							_elm_lang$core$Basics_ops['++'],
+							'/buckets/',
+							_elm_lang$core$Basics$toString(id))),
+					body: _evancz$elm_http$Http$empty,
+					headers: _elm_lang$core$Native_List.fromArray(
+						[])
+				}));
+	});
+var _user$project$ServerClient$Bucket = F3(
+	function (a, b, c) {
+		return {id: a, companyId: b, name: c};
+	});
+var _user$project$ServerClient$bucketDecoder = A4(
+	_elm_lang$core$Json_Decode$object3,
+	_user$project$ServerClient$Bucket,
+	A2(_elm_lang$core$Json_Decode_ops[':='], 'id', _elm_lang$core$Json_Decode$int),
+	A2(_elm_lang$core$Json_Decode_ops[':='], 'companyId', _elm_lang$core$Json_Decode$int),
+	A2(_elm_lang$core$Json_Decode_ops[':='], 'name', _elm_lang$core$Json_Decode$string));
+var _user$project$ServerClient$getBucket = F3(
+	function (id, errorMsg, msg) {
+		return A3(
+			_elm_lang$core$Task$perform,
+			errorMsg,
+			msg,
+			A2(
+				_evancz$elm_http$Http$get,
+				_user$project$ServerClient$bucketDecoder,
+				A2(
+					_elm_lang$core$Basics_ops['++'],
+					_user$project$ServerClient$baseUrl,
+					A2(
+						_elm_lang$core$Basics_ops['++'],
+						'/buckets/',
+						_elm_lang$core$Basics$toString(id)))));
+	});
+var _user$project$ServerClient$createBucket = F3(
+	function (bucket, errorMsg, msg) {
+		return A3(
+			_elm_lang$core$Task$perform,
+			errorMsg,
+			msg,
+			A2(
+				_evancz$elm_http$Http$fromJson,
+				_user$project$ServerClient$bucketDecoder,
+				A2(
+					_evancz$elm_http$Http$send,
+					_evancz$elm_http$Http$defaultSettings,
+					{
+						verb: 'POST',
+						url: A2(_elm_lang$core$Basics_ops['++'], _user$project$ServerClient$baseUrl, '/buckets'),
+						body: _evancz$elm_http$Http$string(
+							_user$project$ServerClient$encodeBucket(bucket)),
+						headers: _elm_lang$core$Native_List.fromArray(
+							[
+								{ctor: '_Tuple2', _0: 'Content-Type', _1: 'application/json'}
+							])
+					})));
+	});
+var _user$project$ServerClient$bucketsDecoder = _elm_lang$core$Json_Decode$list(_user$project$ServerClient$bucketDecoder);
+var _user$project$ServerClient$getBuckets = F2(
+	function (errorMsg, msg) {
+		return A3(
+			_elm_lang$core$Task$perform,
+			errorMsg,
+			msg,
+			A2(
+				_evancz$elm_http$Http$get,
+				_user$project$ServerClient$bucketsDecoder,
+				A2(_elm_lang$core$Basics_ops['++'], _user$project$ServerClient$baseUrl, '/buckets')));
+	});
+
+var _user$project$Routes$pathDecoder = _elm_lang$core$Json_Decode$oneOf(
 	_elm_lang$core$Native_List.fromArray(
 		[
-			A2(_debois$elm_mdl$Material_Grid$size, _debois$elm_mdl$Material_Grid$All, 9)
-		]),
-	_elm_lang$core$Native_List.fromArray(
-		[
-			_elm_lang$html$Html$text('Catalog')
+			A2(
+			_elm_lang$core$Json_Decode$at,
+			_elm_lang$core$Native_List.fromArray(
+				['dataset', 'navigate']),
+			_elm_lang$core$Json_Decode$string),
+			A2(
+			_elm_lang$core$Json_Decode$at,
+			_elm_lang$core$Native_List.fromArray(
+				['parentElement']),
+			_elm_community$json_extra$Json_Decode_Extra$lazy(
+				function (_p0) {
+					return _user$project$Routes$pathDecoder;
+				})),
+			_elm_lang$core$Json_Decode$fail('no path found for click')
 		]));
-var _user$project$Pages_Dashboard$model = {mdl: _debois$elm_mdl$Material$model, url: '#dashboard'};
-var _user$project$Pages_Dashboard$Model = F2(
+var _user$project$Routes$catchNavigationClicks = function (tagger) {
+	return A3(
+		_elm_lang$html$Html_Events$onWithOptions,
+		'click',
+		{stopPropagation: true, preventDefault: true},
+		A2(
+			_elm_lang$core$Json_Decode$map,
+			tagger,
+			A2(
+				_elm_lang$core$Json_Decode$at,
+				_elm_lang$core$Native_List.fromArray(
+					['target']),
+				_user$project$Routes$pathDecoder)));
+};
+var _user$project$Routes$encode = function (route) {
+	var _p1 = route;
+	switch (_p1.ctor) {
+		case 'Home':
+			return '/#/';
+		case 'DashboardPage':
+			return '/#/dashboard';
+		case 'BucketListingPage':
+			return '/#/buckets';
+		case 'BucketDetailPage':
+			return A2(
+				_elm_lang$core$Basics_ops['++'],
+				'/#/buckets/',
+				_elm_lang$core$Basics$toString(_p1._0));
+		default:
+			return '/#/buckets/new';
+	}
+};
+var _user$project$Routes$navigate = function (route) {
+	return _elm_lang$navigation$Navigation$newUrl(
+		_user$project$Routes$encode(route));
+};
+var _user$project$Routes$linkAttrs = function (route) {
+	var path = _user$project$Routes$encode(route);
+	return _elm_lang$core$Native_List.fromArray(
+		[
+			_elm_lang$html$Html_Attributes$href(path),
+			A2(_elm_lang$html$Html_Attributes$attribute, 'data-navigate', path)
+		]);
+};
+var _user$project$Routes$linkTo = F3(
+	function (route, attrs, content) {
+		return A2(
+			_elm_lang$html$Html$a,
+			A2(
+				_elm_lang$core$Basics_ops['++'],
+				_user$project$Routes$linkAttrs(route),
+				attrs),
+			content);
+	});
+var _user$project$Routes$NewBucketPage = {ctor: 'NewBucketPage'};
+var _user$project$Routes$BucketDetailPage = function (a) {
+	return {ctor: 'BucketDetailPage', _0: a};
+};
+var _user$project$Routes$BucketListingPage = {ctor: 'BucketListingPage'};
+var _user$project$Routes$DashboardPage = {ctor: 'DashboardPage'};
+var _user$project$Routes$Home = {ctor: 'Home'};
+var _user$project$Routes$routeParser = _evancz$url_parser$UrlParser$oneOf(
+	_elm_lang$core$Native_List.fromArray(
+		[
+			A2(
+			_evancz$url_parser$UrlParser$format,
+			_user$project$Routes$Home,
+			_evancz$url_parser$UrlParser$s('')),
+			A2(
+			_evancz$url_parser$UrlParser$format,
+			_user$project$Routes$NewBucketPage,
+			A2(
+				_evancz$url_parser$UrlParser_ops['</>'],
+				_evancz$url_parser$UrlParser$s('buckets'),
+				_evancz$url_parser$UrlParser$s('new'))),
+			A2(
+			_evancz$url_parser$UrlParser$format,
+			_user$project$Routes$BucketDetailPage,
+			A2(
+				_evancz$url_parser$UrlParser_ops['</>'],
+				_evancz$url_parser$UrlParser$s('buckets'),
+				_evancz$url_parser$UrlParser$int)),
+			A2(
+			_evancz$url_parser$UrlParser$format,
+			_user$project$Routes$BucketListingPage,
+			_evancz$url_parser$UrlParser$s('buckets')),
+			A2(
+			_evancz$url_parser$UrlParser$format,
+			_user$project$Routes$DashboardPage,
+			_evancz$url_parser$UrlParser$s('dashboard'))
+		]));
+var _user$project$Routes$decode = function (location) {
+	return A3(
+		_evancz$url_parser$UrlParser$parse,
+		_elm_lang$core$Basics$identity,
+		_user$project$Routes$routeParser,
+		A2(_elm_lang$core$String$dropLeft, 2, location.hash));
+};
+
+var _user$project$BucketDetail$view = function (bucket) {
+	return A2(
+		_elm_lang$html$Html$div,
+		_elm_lang$core$Native_List.fromArray(
+			[]),
+		_elm_lang$core$Native_List.fromArray(
+			[
+				_elm_lang$html$Html$text(bucket.name)
+			]));
+};
+var _user$project$BucketDetail$createBucketModel = F2(
+	function (model, bucket) {
+		return {
+			mdl: _debois$elm_mdl$Material$model,
+			id: _elm_lang$core$Maybe$Just(bucket.id),
+			companyId: _elm_lang$core$Maybe$Just(bucket.companyId),
+			name: bucket.name
+		};
+	});
+var _user$project$BucketDetail$update = F2(
+	function (msg, model) {
+		var _p0 = msg;
+		if (_p0.ctor === 'ShowBucket') {
+			return {
+				ctor: '_Tuple2',
+				_0: A2(_user$project$BucketDetail$createBucketModel, model, _p0._0),
+				_1: _elm_lang$core$Platform_Cmd$none
+			};
+		} else {
+			return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
+		}
+	});
+var _user$project$BucketDetail$initialModel = {mdl: _debois$elm_mdl$Material$model, id: _elm_lang$core$Maybe$Nothing, companyId: _elm_lang$core$Maybe$Nothing, name: ''};
+var _user$project$BucketDetail$init = _user$project$BucketDetail$initialModel;
+var _user$project$BucketDetail$Model = F4(
+	function (a, b, c, d) {
+		return {mdl: a, id: b, companyId: c, name: d};
+	});
+var _user$project$BucketDetail$FetchBucketFailed = function (a) {
+	return {ctor: 'FetchBucketFailed', _0: a};
+};
+var _user$project$BucketDetail$ShowBucket = function (a) {
+	return {ctor: 'ShowBucket', _0: a};
+};
+var _user$project$BucketDetail$mountShowCmd = function (id) {
+	return A3(_user$project$ServerClient$getBucket, id, _user$project$BucketDetail$FetchBucketFailed, _user$project$BucketDetail$ShowBucket);
+};
+
+var _user$project$BucketListing$model = {
+	mdl: _debois$elm_mdl$Material$model,
+	buckets: _elm_lang$core$Native_List.fromArray(
+		[]),
+	errors: _elm_lang$core$Native_List.fromArray(
+		[])
+};
+var _user$project$BucketListing$init = _user$project$BucketListing$model;
+var _user$project$BucketListing$Model = F3(
+	function (a, b, c) {
+		return {mdl: a, buckets: b, errors: c};
+	});
+var _user$project$BucketListing$DeleteFailed = {ctor: 'DeleteFailed'};
+var _user$project$BucketListing$HandleBucketDeleted = {ctor: 'HandleBucketDeleted'};
+var _user$project$BucketListing$DeleteBucket = function (a) {
+	return {ctor: 'DeleteBucket', _0: a};
+};
+var _user$project$BucketListing$bucketItem = function (bucket) {
+	return A2(
+		_elm_lang$html$Html$li,
+		_elm_lang$core$Native_List.fromArray(
+			[]),
+		_elm_lang$core$Native_List.fromArray(
+			[
+				_elm_lang$html$Html$text(bucket.name),
+				A3(
+				_user$project$Routes$linkTo,
+				_user$project$Routes$BucketDetailPage(bucket.id),
+				_elm_lang$core$Native_List.fromArray(
+					[]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html$text('Edit')
+					])),
+				A2(
+				_elm_lang$html$Html$button,
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html_Events$onClick(
+						_user$project$BucketListing$DeleteBucket(
+							function (_) {
+								return _.id;
+							}(bucket)))
+					]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html$text('Delete!')
+					]))
+			]));
+};
+var _user$project$BucketListing$view = function (model) {
+	return A2(
+		_elm_lang$html$Html$div,
+		_elm_lang$core$Native_List.fromArray(
+			[]),
+		_elm_lang$core$Native_List.fromArray(
+			[
+				A2(
+				_elm_lang$html$Html$h1,
+				_elm_lang$core$Native_List.fromArray(
+					[]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html$text('Buckets')
+					])),
+				A3(
+				_user$project$Routes$linkTo,
+				_user$project$Routes$NewBucketPage,
+				_elm_lang$core$Native_List.fromArray(
+					[]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html$text('New Bucket')
+					])),
+				A2(
+				_elm_lang$html$Html$ul,
+				_elm_lang$core$Native_List.fromArray(
+					[]),
+				A2(_elm_lang$core$List$map, _user$project$BucketListing$bucketItem, model.buckets))
+			]));
+};
+var _user$project$BucketListing$FetchBucketsFailed = function (a) {
+	return {ctor: 'FetchBucketsFailed', _0: a};
+};
+var _user$project$BucketListing$HandleBucketsRetrieved = function (a) {
+	return {ctor: 'HandleBucketsRetrieved', _0: a};
+};
+var _user$project$BucketListing$mountCmd = A2(_user$project$ServerClient$getBuckets, _user$project$BucketListing$FetchBucketsFailed, _user$project$BucketListing$HandleBucketsRetrieved);
+var _user$project$BucketListing$Show = {ctor: 'Show'};
+var _user$project$BucketListing$update = F2(
+	function (action, model) {
+		update:
+		while (true) {
+			var _p0 = action;
+			switch (_p0.ctor) {
+				case 'Mdl':
+					return A2(_debois$elm_mdl$Material$update, _p0._0, model);
+				case 'Show':
+					return {ctor: '_Tuple2', _0: model, _1: _user$project$BucketListing$mountCmd};
+				case 'HandleBucketsRetrieved':
+					return {
+						ctor: '_Tuple2',
+						_0: _elm_lang$core$Native_Utils.update(
+							model,
+							{buckets: _p0._0}),
+						_1: _elm_lang$core$Platform_Cmd$none
+					};
+				case 'FetchBucketsFailed':
+					return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
+				case 'DeleteBucket':
+					return {
+						ctor: '_Tuple2',
+						_0: model,
+						_1: A3(_user$project$ServerClient$deleteBucket, _p0._0, _user$project$BucketListing$DeleteFailed, _user$project$BucketListing$HandleBucketDeleted)
+					};
+				case 'HandleBucketDeleted':
+					var _v1 = _user$project$BucketListing$Show,
+						_v2 = model;
+					action = _v1;
+					model = _v2;
+					continue update;
+				default:
+					return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
+			}
+		}
+	});
+var _user$project$BucketListing$Mdl = function (a) {
+	return {ctor: 'Mdl', _0: a};
+};
+
+var _user$project$Dashboard$view = function (model) {
+	return A2(
+		_elm_lang$html$Html$div,
+		_elm_lang$core$Native_List.fromArray(
+			[]),
+		_elm_lang$core$Native_List.fromArray(
+			[
+				_elm_lang$html$Html$text('Dashboard')
+			]));
+};
+var _user$project$Dashboard$update = F2(
+	function (msg, model) {
+		var _p0 = msg;
+		if (_p0.ctor === 'Mdl') {
+			return A2(_debois$elm_mdl$Material$update, _p0._0, model);
+		} else {
+			return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
+		}
+	});
+var _user$project$Dashboard$mountCmd = _elm_lang$core$Platform_Cmd$none;
+var _user$project$Dashboard$model = {mdl: _debois$elm_mdl$Material$model, url: '#dashboard'};
+var _user$project$Dashboard$init = _user$project$Dashboard$model;
+var _user$project$Dashboard$Model = F2(
 	function (a, b) {
 		return {mdl: a, url: b};
 	});
-var _user$project$Pages_Dashboard$Click = {ctor: 'Click'};
-var _user$project$Pages_Dashboard$Mdl = function (a) {
+var _user$project$Dashboard$Show = {ctor: 'Show'};
+var _user$project$Dashboard$Mdl = function (a) {
 	return {ctor: 'Mdl', _0: a};
 };
 
-var _user$project$Pages_Catalog$view = A2(
-	_debois$elm_mdl$Material_Grid$cell,
-	_elm_lang$core$Native_List.fromArray(
-		[
-			A2(_debois$elm_mdl$Material_Grid$size, _debois$elm_mdl$Material_Grid$All, 9)
-		]),
-	_elm_lang$core$Native_List.fromArray(
-		[
-			_elm_lang$html$Html$text('Catalog')
-		]));
-var _user$project$Pages_Catalog$model = {mdl: _debois$elm_mdl$Material$model};
-var _user$project$Pages_Catalog$Model = function (a) {
-	return {mdl: a};
+var _user$project$Home$view = function (model) {
+	return A2(
+		_elm_lang$html$Html$div,
+		_elm_lang$core$Native_List.fromArray(
+			[]),
+		_elm_lang$core$Native_List.fromArray(
+			[
+				_elm_lang$html$Html$text('Home')
+			]));
 };
-var _user$project$Pages_Catalog$Click = {ctor: 'Click'};
-var _user$project$Pages_Catalog$Mdl = function (a) {
-	return {ctor: 'Mdl', _0: a};
-};
+var _user$project$Home$update = F2(
+	function (msg, model) {
+		var _p0 = msg;
+		return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
+	});
+var _user$project$Home$init = {ctor: '_Tuple0'};
+var _user$project$Home$Show = {ctor: 'Show'};
 
-var _user$project$Inventory$sidebar = A2(
+var _user$project$Main$styleBlockLink = _elm_lang$core$Native_List.fromArray(
+	[
+		{ctor: '_Tuple2', _0: 'display', _1: 'block'},
+		{ctor: '_Tuple2', _0: 'min-width', _1: '100%'},
+		{ctor: '_Tuple2', _0: 'text-decoration', _1: 'none'}
+	]);
+var _user$project$Main$blockLink = F3(
+	function (route, iconName, description) {
+		return A3(
+			_user$project$Routes$linkTo,
+			route,
+			_elm_lang$core$Native_List.fromArray(
+				[
+					_elm_lang$html$Html_Attributes$style(_user$project$Main$styleBlockLink)
+				]),
+			_elm_lang$core$Native_List.fromArray(
+				[
+					A2(
+					_debois$elm_mdl$Material_List$content,
+					_elm_lang$core$Native_List.fromArray(
+						[]),
+					_elm_lang$core$Native_List.fromArray(
+						[
+							A2(
+							_debois$elm_mdl$Material_List$icon,
+							iconName,
+							_elm_lang$core$Native_List.fromArray(
+								[])),
+							_elm_lang$html$Html$text(description)
+						]))
+				]));
+	});
+var _user$project$Main$sidebar = A2(
 	_debois$elm_mdl$Material_Grid$cell,
 	_elm_lang$core$Native_List.fromArray(
 		[
-			A2(_debois$elm_mdl$Material_Grid$size, _debois$elm_mdl$Material_Grid$All, 3)
+			A2(_debois$elm_mdl$Material_Grid$size, _debois$elm_mdl$Material_Grid$All, 3),
+			A2(_debois$elm_mdl$Material_Options$css, 'margin', '0 8px 0 0'),
+			A2(_debois$elm_mdl$Material_Options$css, 'height', '95vh'),
+			A2(_debois$elm_mdl$Material_Options$css, 'background', '#fff')
 		]),
 	_elm_lang$core$Native_List.fromArray(
 		[
@@ -14612,19 +15364,7 @@ var _user$project$Inventory$sidebar = A2(
 						[]),
 					_elm_lang$core$Native_List.fromArray(
 						[
-							A2(
-							_debois$elm_mdl$Material_List$content,
-							_elm_lang$core$Native_List.fromArray(
-								[]),
-							_elm_lang$core$Native_List.fromArray(
-								[
-									A2(
-									_debois$elm_mdl$Material_List$icon,
-									'inbox',
-									_elm_lang$core$Native_List.fromArray(
-										[])),
-									_elm_lang$html$Html$text('Inbox')
-								]))
+							A3(_user$project$Main$blockLink, _user$project$Routes$DashboardPage, 'dashboard', 'Dashboard')
 						])),
 					A2(
 					_debois$elm_mdl$Material_List$li,
@@ -14632,43 +15372,11 @@ var _user$project$Inventory$sidebar = A2(
 						[]),
 					_elm_lang$core$Native_List.fromArray(
 						[
-							A2(
-							_debois$elm_mdl$Material_List$content,
-							_elm_lang$core$Native_List.fromArray(
-								[]),
-							_elm_lang$core$Native_List.fromArray(
-								[
-									A2(
-									_debois$elm_mdl$Material_List$icon,
-									'send',
-									_elm_lang$core$Native_List.fromArray(
-										[])),
-									_elm_lang$html$Html$text('Sent mail')
-								]))
-						])),
-					A2(
-					_debois$elm_mdl$Material_List$li,
-					_elm_lang$core$Native_List.fromArray(
-						[]),
-					_elm_lang$core$Native_List.fromArray(
-						[
-							A2(
-							_debois$elm_mdl$Material_List$content,
-							_elm_lang$core$Native_List.fromArray(
-								[]),
-							_elm_lang$core$Native_List.fromArray(
-								[
-									A2(
-									_debois$elm_mdl$Material_List$icon,
-									'delete',
-									_elm_lang$core$Native_List.fromArray(
-										[])),
-									_elm_lang$html$Html$text('Trash')
-								]))
+							A3(_user$project$Main$blockLink, _user$project$Routes$BucketListingPage, 'local_shipping', 'Bucket Listing')
 						]))
 				]))
 		]));
-var _user$project$Inventory$header = _elm_lang$core$Native_List.fromArray(
+var _user$project$Main$header = _elm_lang$core$Native_List.fromArray(
 	[
 		A2(
 		_debois$elm_mdl$Material_Layout$row,
@@ -14676,13 +15384,16 @@ var _user$project$Inventory$header = _elm_lang$core$Native_List.fromArray(
 			[]),
 		_elm_lang$core$Native_List.fromArray(
 			[
+				_debois$elm_mdl$Material_Icon$i('local_shipping'),
 				A2(
 				_debois$elm_mdl$Material_Layout$title,
 				_elm_lang$core$Native_List.fromArray(
-					[]),
+					[
+						A2(_debois$elm_mdl$Material_Options$css, 'margin-left', '10px')
+					]),
 				_elm_lang$core$Native_List.fromArray(
 					[
-						_elm_lang$html$Html$text('elm-mdl')
+						_elm_lang$html$Html$text('Inventory IO')
 					])),
 				_debois$elm_mdl$Material_Layout$spacer,
 				A2(
@@ -14695,33 +15406,16 @@ var _user$project$Inventory$header = _elm_lang$core$Native_List.fromArray(
 						_debois$elm_mdl$Material_Layout$link,
 						_elm_lang$core$Native_List.fromArray(
 							[
-								_debois$elm_mdl$Material_Layout$href('https://github.com/debois/elm-mdl')
+								_debois$elm_mdl$Material_Layout$href('#')
 							]),
 						_elm_lang$core$Native_List.fromArray(
 							[
-								A2(
-								_elm_lang$html$Html$span,
-								_elm_lang$core$Native_List.fromArray(
-									[]),
-								_elm_lang$core$Native_List.fromArray(
-									[
-										_elm_lang$html$Html$text('github')
-									]))
-							])),
-						A2(
-						_debois$elm_mdl$Material_Layout$link,
-						_elm_lang$core$Native_List.fromArray(
-							[
-								_debois$elm_mdl$Material_Layout$href('http://package.elm-lang.org/packages/debois/elm-mdl/latest/')
-							]),
-						_elm_lang$core$Native_List.fromArray(
-							[
-								_elm_lang$html$Html$text('elm-package')
+								_elm_lang$html$Html$text('Log out')
 							]))
 					]))
 			]))
 	]);
-var _user$project$Inventory$drawer = _elm_lang$core$Native_List.fromArray(
+var _user$project$Main$drawer = _elm_lang$core$Native_List.fromArray(
 	[
 		A2(
 		_debois$elm_mdl$Material_Layout$title,
@@ -14759,122 +15453,251 @@ var _user$project$Inventory$drawer = _elm_lang$core$Native_List.fromArray(
 					]))
 			]))
 	]);
-var _user$project$Inventory$viewPage = function (model) {
-	var _p0 = model.page;
-	if (_p0.ctor === 'Dashboard') {
-		return _user$project$Pages_Dashboard$view;
-	} else {
-		return _user$project$Pages_Catalog$view;
-	}
-};
-var _user$project$Inventory$top = function (model) {
-	return A2(
-		_debois$elm_mdl$Material_Grid$grid,
-		_elm_lang$core$Native_List.fromArray(
-			[]),
-		_elm_lang$core$Native_List.fromArray(
-			[
-				_user$project$Inventory$sidebar,
-				_user$project$Inventory$viewPage(model)
-			]));
-};
-var _user$project$Inventory$subscriptions = function (model) {
-	return _elm_lang$core$Platform_Sub$none;
-};
-var _user$project$Inventory$update = F2(
-	function (msg, model) {
-		var _p1 = msg;
-		return A2(_debois$elm_mdl$Material$update, _p1._0, model);
+var _user$project$Main$initialModel = {mdl: _debois$elm_mdl$Material$model, route: _user$project$Routes$Home, homeModel: _user$project$Home$init, dashboardModel: _user$project$Dashboard$init, bucketListingModel: _user$project$BucketListing$init, bucketDetailModel: _user$project$BucketDetail$init};
+var _user$project$Main$Model = F6(
+	function (a, b, c, d, e, f) {
+		return {mdl: a, route: b, homeModel: c, dashboardModel: d, bucketListingModel: e, bucketDetailModel: f};
 	});
-var _user$project$Inventory$toHash = function (page) {
-	var _p2 = page;
-	if (_p2.ctor === 'Dashboard') {
-		return '#dashboard';
-	} else {
-		return '#catalog';
-	}
+var _user$project$Main$Navigate = function (a) {
+	return {ctor: 'Navigate', _0: a};
 };
-var _user$project$Inventory$urlUpdate = F2(
+var _user$project$Main$DashboardMsg = function (a) {
+	return {ctor: 'DashboardMsg', _0: a};
+};
+var _user$project$Main$BucketDetailMsg = function (a) {
+	return {ctor: 'BucketDetailMsg', _0: a};
+};
+var _user$project$Main$BucketListingMsg = function (a) {
+	return {ctor: 'BucketListingMsg', _0: a};
+};
+var _user$project$Main$urlUpdate = F2(
 	function (result, model) {
-		var _p3 = A2(_elm_lang$core$Debug$log, 'result', result);
-		if (_p3.ctor === 'Err') {
+		var _p0 = A2(_elm_lang$core$Debug$log, 'result', result);
+		if (_p0.ctor === 'Err') {
 			return {
 				ctor: '_Tuple2',
 				_0: model,
 				_1: _elm_lang$navigation$Navigation$modifyUrl(
-					_user$project$Inventory$toHash(model.page))
+					_user$project$Routes$encode(model.route))
 			};
 		} else {
-			return {
-				ctor: '_Tuple2',
-				_0: _elm_lang$core$Native_Utils.update(
-					model,
-					{page: _p3._0}),
-				_1: _elm_lang$core$Platform_Cmd$none
-			};
+			switch (_p0._0.ctor) {
+				case 'BucketListingPage':
+					return A2(
+						_elm_lang$core$Platform_Cmd_ops['!'],
+						_elm_lang$core$Native_Utils.update(
+							model,
+							{route: _p0._0}),
+						_elm_lang$core$Native_List.fromArray(
+							[
+								A2(_elm_lang$core$Platform_Cmd$map, _user$project$Main$BucketListingMsg, _user$project$BucketListing$mountCmd)
+							]));
+				case 'DashboardPage':
+					return A2(
+						_elm_lang$core$Platform_Cmd_ops['!'],
+						_elm_lang$core$Native_Utils.update(
+							model,
+							{route: _p0._0}),
+						_elm_lang$core$Native_List.fromArray(
+							[
+								A2(_elm_lang$core$Platform_Cmd$map, _user$project$Main$DashboardMsg, _user$project$Dashboard$mountCmd)
+							]));
+				case 'BucketDetailPage':
+					return A2(
+						_elm_lang$core$Platform_Cmd_ops['!'],
+						_elm_lang$core$Native_Utils.update(
+							model,
+							{route: _p0._0}),
+						_elm_lang$core$Native_List.fromArray(
+							[
+								A2(
+								_elm_lang$core$Platform_Cmd$map,
+								_user$project$Main$BucketDetailMsg,
+								_user$project$BucketDetail$mountShowCmd(_p0._0._0))
+							]));
+				case 'NewBucketPage':
+					return A2(
+						_elm_lang$core$Platform_Cmd_ops['!'],
+						_elm_lang$core$Native_Utils.update(
+							model,
+							{route: _p0._0, bucketDetailModel: _user$project$BucketDetail$init}),
+						_elm_lang$core$Native_List.fromArray(
+							[]));
+				default:
+					return A2(
+						_elm_lang$core$Platform_Cmd_ops['!'],
+						_elm_lang$core$Native_Utils.update(
+							model,
+							{route: _p0._0}),
+						_elm_lang$core$Native_List.fromArray(
+							[]));
+			}
 		}
 	});
-var _user$project$Inventory$viewLink = F2(
-	function (page, description) {
-		return A2(
-			_elm_lang$html$Html$a,
-			_elm_lang$core$Native_List.fromArray(
-				[
-					_elm_lang$html$Html_Attributes$style(
+var _user$project$Main$init = function (result) {
+	return A2(_user$project$Main$urlUpdate, result, _user$project$Main$initialModel);
+};
+var _user$project$Main$HomeMsg = function (a) {
+	return {ctor: 'HomeMsg', _0: a};
+};
+var _user$project$Main$update = F2(
+	function (msg, model) {
+		var _p1 = msg;
+		switch (_p1.ctor) {
+			case 'Mdl':
+				return A2(_debois$elm_mdl$Material$update, _p1._0, model);
+			case 'HomeMsg':
+				var _p2 = A2(_user$project$Home$update, _p1._0, model.homeModel);
+				var subMdl = _p2._0;
+				var subCmd = _p2._1;
+				return A2(
+					_elm_lang$core$Platform_Cmd_ops['!'],
+					_elm_lang$core$Native_Utils.update(
+						model,
+						{homeModel: subMdl}),
 					_elm_lang$core$Native_List.fromArray(
 						[
-							{ctor: '_Tuple2', _0: 'padding', _1: '0 20px'}
-						])),
-					_elm_lang$html$Html_Attributes$href(
-					_user$project$Inventory$toHash(page))
-				]),
-			_elm_lang$core$Native_List.fromArray(
-				[
-					_elm_lang$html$Html$text(description)
-				]));
+							A2(_elm_lang$core$Platform_Cmd$map, _user$project$Main$HomeMsg, subCmd)
+						]));
+			case 'BucketListingMsg':
+				var _p3 = A2(_user$project$BucketListing$update, _p1._0, model.bucketListingModel);
+				var subMdl = _p3._0;
+				var subCmd = _p3._1;
+				return A2(
+					_elm_lang$core$Platform_Cmd_ops['!'],
+					_elm_lang$core$Native_Utils.update(
+						model,
+						{bucketListingModel: subMdl}),
+					_elm_lang$core$Native_List.fromArray(
+						[
+							A2(_elm_lang$core$Platform_Cmd$map, _user$project$Main$BucketListingMsg, subCmd)
+						]));
+			case 'BucketDetailMsg':
+				var _p4 = A2(_user$project$BucketDetail$update, _p1._0, model.bucketDetailModel);
+				var subMdl = _p4._0;
+				var subCmd = _p4._1;
+				return A2(
+					_elm_lang$core$Platform_Cmd_ops['!'],
+					_elm_lang$core$Native_Utils.update(
+						model,
+						{bucketDetailModel: subMdl}),
+					_elm_lang$core$Native_List.fromArray(
+						[
+							A2(_elm_lang$core$Platform_Cmd$map, _user$project$Main$BucketDetailMsg, subCmd)
+						]));
+			case 'DashboardMsg':
+				var _p5 = A2(_user$project$Dashboard$update, _p1._0, model.dashboardModel);
+				var subMdl = _p5._0;
+				var subCmd = _p5._1;
+				return A2(
+					_elm_lang$core$Platform_Cmd_ops['!'],
+					_elm_lang$core$Native_Utils.update(
+						model,
+						{dashboardModel: subMdl}),
+					_elm_lang$core$Native_List.fromArray(
+						[
+							A2(_elm_lang$core$Platform_Cmd$map, _user$project$Main$DashboardMsg, subCmd)
+						]));
+			default:
+				return A2(
+					_elm_lang$core$Platform_Cmd_ops['!'],
+					model,
+					_elm_lang$core$Native_List.fromArray(
+						[
+							_elm_lang$navigation$Navigation$newUrl(_p1._0)
+						]));
+		}
 	});
-var _user$project$Inventory$Model = F2(
-	function (a, b) {
-		return {mdl: a, page: b};
-	});
-var _user$project$Inventory$Catalog = {ctor: 'Catalog'};
-var _user$project$Inventory$Dashboard = {ctor: 'Dashboard'};
-var _user$project$Inventory$pageParser = _evancz$url_parser$UrlParser$oneOf(
-	_elm_lang$core$Native_List.fromArray(
-		[
-			A2(
-			_evancz$url_parser$UrlParser$format,
-			_user$project$Inventory$Dashboard,
-			_evancz$url_parser$UrlParser$s('dashboard')),
-			A2(
-			_evancz$url_parser$UrlParser$format,
-			_user$project$Inventory$Catalog,
-			_evancz$url_parser$UrlParser$s('catalog'))
-		]));
-var _user$project$Inventory$hashParser = function (location) {
-	return A3(
-		_evancz$url_parser$UrlParser$parse,
-		_elm_lang$core$Basics$identity,
-		_user$project$Inventory$pageParser,
-		A2(_elm_lang$core$String$dropLeft, 1, location.hash));
+var _user$project$Main$contentView = function (model) {
+	var _p6 = model.route;
+	switch (_p6.ctor) {
+		case 'Home':
+			return A2(
+				_elm_lang$html$Html_App$map,
+				_user$project$Main$HomeMsg,
+				_user$project$Home$view(model.homeModel));
+		case 'DashboardPage':
+			return A2(
+				_elm_lang$html$Html_App$map,
+				_user$project$Main$DashboardMsg,
+				_user$project$Dashboard$view(model.dashboardModel));
+		case 'BucketListingPage':
+			return A2(
+				_elm_lang$html$Html_App$map,
+				_user$project$Main$BucketListingMsg,
+				_user$project$BucketListing$view(model.bucketListingModel));
+		case 'BucketDetailPage':
+			return A2(
+				_elm_lang$html$Html$div,
+				_elm_lang$core$Native_List.fromArray(
+					[]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html$text('Bucket Detail')
+					]));
+		default:
+			return A2(
+				_elm_lang$html$Html$div,
+				_elm_lang$core$Native_List.fromArray(
+					[]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html$text('New Bucket')
+					]));
+	}
 };
-var _user$project$Inventory$model = {mdl: _debois$elm_mdl$Material$model, page: _user$project$Inventory$Dashboard};
-var _user$project$Inventory$init = function (result) {
-	return A2(_user$project$Inventory$urlUpdate, result, _user$project$Inventory$model);
+var _user$project$Main$top = function (model) {
+	return A2(
+		_elm_lang$html$Html$div,
+		_elm_lang$core$Native_List.fromArray(
+			[
+				_user$project$Routes$catchNavigationClicks(_user$project$Main$Navigate)
+			]),
+		_elm_lang$core$Native_List.fromArray(
+			[
+				A3(
+				_user$project$Routes$linkTo,
+				_user$project$Routes$BucketListingPage,
+				_elm_lang$core$Native_List.fromArray(
+					[]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html$text('Buckets')
+					])),
+				A3(
+				_user$project$Routes$linkTo,
+				_user$project$Routes$DashboardPage,
+				_elm_lang$core$Native_List.fromArray(
+					[]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html$text('Dashbaord')
+					])),
+				A3(
+				_user$project$Routes$linkTo,
+				_user$project$Routes$Home,
+				_elm_lang$core$Native_List.fromArray(
+					[]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html$text('Home')
+					])),
+				_user$project$Main$contentView(model)
+			]));
 };
-var _user$project$Inventory$Mdl = function (a) {
+var _user$project$Main$Mdl = function (a) {
 	return {ctor: 'Mdl', _0: a};
 };
-var _user$project$Inventory$view = function (model) {
+var _user$project$Main$view = function (model) {
 	return A4(
 		_debois$elm_mdl$Material_Layout$render,
-		_user$project$Inventory$Mdl,
+		_user$project$Main$Mdl,
 		model.mdl,
 		_elm_lang$core$Native_List.fromArray(
 			[_debois$elm_mdl$Material_Layout$fixedHeader]),
 		{
-			header: _user$project$Inventory$header,
-			drawer: _user$project$Inventory$drawer,
+			header: _user$project$Main$header,
+			drawer: _user$project$Main$drawer,
 			tabs: {
 				ctor: '_Tuple2',
 				_0: _elm_lang$core$Native_List.fromArray(
@@ -14884,20 +15707,23 @@ var _user$project$Inventory$view = function (model) {
 			},
 			main: _elm_lang$core$Native_List.fromArray(
 				[
-					_user$project$Inventory$top(model)
+					_user$project$Main$top(model)
 				])
 		});
 };
-var _user$project$Inventory$main = {
+var _user$project$Main$subscriptions = function (model) {
+	return A2(_debois$elm_mdl$Material$subscriptions, _user$project$Main$Mdl, model);
+};
+var _user$project$Main$main = {
 	main: A2(
 		_elm_lang$navigation$Navigation$program,
-		_elm_lang$navigation$Navigation$makeParser(_user$project$Inventory$hashParser),
-		{init: _user$project$Inventory$init, view: _user$project$Inventory$view, update: _user$project$Inventory$update, urlUpdate: _user$project$Inventory$urlUpdate, subscriptions: _user$project$Inventory$subscriptions})
+		_elm_lang$navigation$Navigation$makeParser(_user$project$Routes$decode),
+		{init: _user$project$Main$init, view: _user$project$Main$view, update: _user$project$Main$update, urlUpdate: _user$project$Main$urlUpdate, subscriptions: _user$project$Main$subscriptions})
 };
 
 var Elm = {};
-Elm['Inventory'] = Elm['Inventory'] || {};
-_elm_lang$core$Native_Platform.addPublicModule(Elm['Inventory'], 'Inventory', typeof _user$project$Inventory$main === 'undefined' ? null : _user$project$Inventory$main);
+Elm['Main'] = Elm['Main'] || {};
+_elm_lang$core$Native_Platform.addPublicModule(Elm['Main'], 'Main', typeof _user$project$Main$main === 'undefined' ? null : _user$project$Main$main);
 
 if (typeof define === "function" && define['amd'])
 {

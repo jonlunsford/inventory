@@ -58,7 +58,7 @@ exports.config = {
     },
 
     elmBrunch: {
-      mainModules: ["web/elm/Inventory.elm"],
+      mainModules: ["web/elm/Main.elm"],
       outputFolder: "web/static/vendor"
     }
   },

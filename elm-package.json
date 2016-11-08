@@ -5,11 +5,13 @@
     "license": "BSD3",
     "source-directories": [
         "web/elm",
+        "web/elm/src",
         "."
     ],
     "exposed-modules": [],
     "dependencies": {
         "debois/elm-mdl": "7.6.0 <= v < 8.0.0",
+        "elm-community/json-extra": "1.1.0 <= v < 2.0.0",
         "elm-lang/core": "4.0.5 <= v < 5.0.0",
         "elm-lang/dom": "1.1.0 <= v < 2.0.0",
         "elm-lang/html": "1.1.0 <= v < 2.0.0",

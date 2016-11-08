@@ -1,4 +1,4 @@
-defmodule Inventory.V1.ProductsController do
+defmodule Inventory.Api.V1.ProductsController do
   use Inventory.Web, :controller
 
   alias Inventory.Product

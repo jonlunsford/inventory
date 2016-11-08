@@ -1,4 +1,4 @@
-defmodule Inventory.V1.BucketsControllerTest do
+defmodule Inventory.Api.V1.BucketsControllerTest do
   use ExUnit.Case
   use Inventory.ConnCase
 

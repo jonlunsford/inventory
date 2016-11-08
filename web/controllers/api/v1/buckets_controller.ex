@@ -1,4 +1,4 @@
-defmodule Inventory.V1.BucketsController do
+defmodule Inventory.Api.V1.BucketsController do
   use Inventory.Web, :controller
 
   alias Inventory.Bucket

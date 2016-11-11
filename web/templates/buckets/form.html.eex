@@ -1,0 +1,5 @@
+<label>
+  Name: <%= text_input @f, :name %>
+</label>
+
+<%= submit "Submit" %>

@@ -1,0 +1,14 @@
+<h1>Buckets</h1>
+
+<ul>
+  <%= for bucket <- @buckets do %>
+    <li>
+      <strong><%= bucket.name %></strong>
+      <%= link "Edit", to: buckets_path(Inventory.Endpoint, :edit, bucket.id) %>
+      <%= link "Delete", to: buckets_path(Inventory.Endpoint, :delete, bucket.id), method: :delete, data: [confirm: "Delete Bucket?"] %>
+    </li>
+  <% end %>
+</ul>
+
+<%= link "New Bucket", to: buckets_path(Inventory.Endpoint, :new) %>
+

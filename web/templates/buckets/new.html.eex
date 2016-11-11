@@ -1,0 +1,4 @@
+<%= form_for @changeset, buckets_path(@conn, :create), fn f -> %>
+  <%= render Inventory.BucketsView, "form.html", f: f %>
+<% end %>
+

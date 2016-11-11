@@ -1,4 +1,4 @@
-defmodule Inventory.V1.ProductsControllerTest do
+defmodule Inventory.Api.V1.ProductsControllerTest do
   use ExUnit.Case
   use Inventory.ConnCase
 

@@ -66,5 +66,4 @@ defmodule Inventory.Api.V1.BucketsControllerTest do
     response = json_response(conn, 200)
     assert response["deleted"] == true
   end
-
 end

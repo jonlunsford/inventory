@@ -1,0 +1,4 @@
+<%= form_for @changeset, products_path(@conn, :create), fn f -> %>
+  <%= render Inventory.ProductsView, "form.html", f: f %>
+<% end %>
+

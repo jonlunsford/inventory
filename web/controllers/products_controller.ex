@@ -8,9 +8,20 @@ defmodule Inventory.ProductsController do
     render conn, "index.html", products: Repo.all(Product)
   end
 
+  def new(conn, _params) do
+    changeset = Product.changeset(%Product{})
+    render conn, "new.html", changeset: changeset
+  end
+
   def show(conn, %{"id" => id}) do
     product = Repo.get!(Product, id) |> Repo.preload(:buckets)
     render conn, "show.html", product: product
+  end
+
+  def edit(conn, %{"id" => id}) do
+    bucket = Repo.get(Product, id) |> Repo.preload(:buckets)
+    changeset = Product.changeset(bucket)
+    render conn, "edit.html", changeset: changeset
   end
 
   def create(conn, %{"product" => product_params}) do

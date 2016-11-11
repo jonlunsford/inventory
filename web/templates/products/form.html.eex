@@ -1,0 +1,5 @@
+<label>
+  title: <%= text_input @f, :title %>
+</label>
+
+<%= submit "Submit" %>

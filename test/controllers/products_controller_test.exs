@@ -2,13 +2,16 @@ defmodule Inventory.ProductsControllerTest do
   use ExUnit.Case
   use Inventory.ConnCase
 
+  alias Inventory.Bucket
+  alias Inventory.Product
+
   setup do
     bucket =
-      %Inventory.Bucket{name: "My Bucket"}
+      %Bucket{name: "My Bucket"}
       |> Inventory.Repo.insert!
 
     product =
-      %Inventory.Product{title: "My Product"}
+      %Product{title: "My Product"}
       |> Inventory.Repo.insert!
 
     %Inventory.ProductBucket{
@@ -25,6 +28,11 @@ defmodule Inventory.ProductsControllerTest do
     assert product.title == context[:title]
   end
 
+  test "GET /products/new" do
+    conn = get build_conn, "/products/new"
+    assert conn.assigns[:changeset] == Product.changeset(%Product{})
+  end
+
   test "GET /products/:id", context do
     conn = get build_conn, "/products/#{context[:id]}"
     assert conn.assigns[:product].title == context[:title]
@@ -33,6 +41,11 @@ defmodule Inventory.ProductsControllerTest do
   test "GET /products/:id with buckets", context do
     conn = get build_conn, "/products/#{context[:id]}"
     assert hd(conn.assigns[:product].buckets).name == "My Bucket"
+  end
+
+  test "GET /products/:id/edit", context do
+    conn = get build_conn, "/products/#{context[:id]}/edit"
+    assert conn.assigns[:changeset].data.title == context[:title]
   end
 
   test "POST /products with valid attributes", %{ conn: conn } do

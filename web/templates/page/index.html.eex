@@ -1,1 +1,2 @@
-<div id="elm-main"></div>
+<%= link "Products", to: products_path(Inventory.Endpoint, :index) %>
+<%= link "Buckets", to: buckets_path(Inventory.Endpoint, :index) %>

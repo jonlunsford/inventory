@@ -1,1 +1,14 @@
 <h1>Products</h1>
+
+<ul>
+  <%= for product <- @products do %>
+    <li>
+      <strong><%= product.title %></strong>
+      <%= link "Edit", to: products_path(Inventory.Endpoint, :edit, product.id) %>
+      <%= link "Delete", to: products_path(Inventory.Endpoint, :delete, product.id), method: :delete, data: [confirm: "Delete product?"] %>
+    </li>
+  <% end %>
+</ul>
+
+<%= link "New product", to: products_path(Inventory.Endpoint, :new) %>
+

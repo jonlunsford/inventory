@@ -2,6 +2,7 @@ defmodule Inventory.Api.V1.BucketsController do
   use Inventory.Web, :controller
 
   alias Inventory.Bucket
+  alias Inventory.ErrorHelpers
 
   def index(conn, _params) do
     render conn, "index.json", buckets: Repo.all(Bucket)
@@ -19,7 +20,7 @@ defmodule Inventory.Api.V1.BucketsController do
       {:ok, bucket} ->
         render conn, "show.json", bucket: bucket
       {:error, changeset} ->
-        json(conn,  %{ errors: Ecto.Changeset.traverse_errors(changeset, &Inventory.ErrorHelpers.translate_error/1) })
+        json(conn,  %{ errors: Ecto.Changeset.traverse_errors(changeset, &ErrorHelpers.translate_error/1) })
     end
   end
 
@@ -31,7 +32,7 @@ defmodule Inventory.Api.V1.BucketsController do
       {:ok, bucket} ->
         render conn, "show.json", bucket: bucket
       {:error, changeset} ->
-        json(conn,  %{ errors: Ecto.Changeset.traverse_errors(changeset, &Inventory.ErrorHelpers.translate_error/1) })
+        json(conn,  %{ errors: Ecto.Changeset.traverse_errors(changeset, &ErrorHelpers.translate_error/1) })
     end
   end
 

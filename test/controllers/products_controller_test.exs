@@ -4,6 +4,7 @@ defmodule Inventory.ProductsControllerTest do
 
   alias Inventory.Bucket
   alias Inventory.Product
+  alias Inventory.ProductBucket
 
   setup do
     bucket =
@@ -18,6 +19,14 @@ defmodule Inventory.ProductsControllerTest do
       product_id: product.id,
       bucket_id: bucket.id
     } |> Inventory.Repo.insert!
+
+    on_exit fn ->
+      Ecto.Adapters.SQL.Sandbox.checkout(Inventory.Repo)
+
+      Inventory.Repo.delete_all(Bucket)
+      Inventory.Repo.delete_all(Product)
+      Inventory.Repo.delete_all(ProductBucket)
+    end
 
     { :ok, id: product.id, title: product.title, bucket_id: bucket.id  }
   end
@@ -46,6 +55,15 @@ defmodule Inventory.ProductsControllerTest do
   test "GET /products/:id/edit", context do
     conn = get build_conn, "/products/#{context[:id]}/edit"
     assert conn.assigns[:changeset].data.title == context[:title]
+  end
+
+  test "POST /products with a new bucket", %{ conn: conn } do
+    bucket =
+      %Bucket{name: "New Bucket"}
+      |> Inventory.Repo.insert!
+
+    conn = post conn, "/products", %{ product: %{ title: "New One", bucket_id: bucket.id } }
+    assert hd(conn.assigns[:product].buckets).id == bucket.id
   end
 
   test "POST /products with valid attributes", %{ conn: conn } do

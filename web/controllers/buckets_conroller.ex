@@ -31,7 +31,7 @@ defmodule Inventory.BucketsController do
       {:ok, bucket} ->
         conn
         |> put_flash(:info, "Bucket created successfully!")
-        |> render("show.html", id: bucket.id, bucket: bucket)
+        |> render("show.html", id: bucket.id, bucket: (bucket |> Repo.preload(:products)))
       {:error, changeset} ->
         conn
         |> put_flash(:error, "There were errors creating your bucket.")
@@ -45,9 +45,11 @@ defmodule Inventory.BucketsController do
 
     case Repo.update(changeset) do
       {:ok, bucket} ->
-        render conn, "show.html", bucket: bucket
+        conn
+        |> render("show.html", bucket: (bucket |> Repo.preload(:products)))
       {:error, changeset} ->
-        render conn, "show.html", bucket: changeset.data, errors: Ecto.Changeset.traverse_errors(changeset, &ErrorHelpers.translate_error/1)
+        conn
+        |> render("show.html", bucket: (changeset.data |> Repo.preload(:products)), errors: Ecto.Changeset.traverse_errors(changeset, &ErrorHelpers.translate_error/1))
     end
   end
 

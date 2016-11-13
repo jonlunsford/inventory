@@ -4,6 +4,7 @@ defmodule Inventory.BucketsControllerTest do
 
   alias Inventory.Bucket
   alias Inventory.Product
+  alias Inventory.ProductBucket
 
   setup do
     bucket =
@@ -14,10 +15,18 @@ defmodule Inventory.BucketsControllerTest do
       %Product{title: "My Product"}
       |> Inventory.Repo.insert!
 
-    %Inventory.ProductBucket{
+    %ProductBucket{
       product_id: product.id,
       bucket_id: bucket.id
     } |> Inventory.Repo.insert!
+
+    on_exit fn ->
+      Ecto.Adapters.SQL.Sandbox.checkout(Inventory.Repo)
+
+      Inventory.Repo.delete_all(Bucket)
+      Inventory.Repo.delete_all(Product)
+      Inventory.Repo.delete_all(ProductBucket)
+    end
 
     { :ok, id: bucket.id, name: bucket.name  }
   end
